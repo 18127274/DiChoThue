@@ -1,0 +1,319 @@
+<script src="../javascripts/api.js"></script>
+<script type="text/javascript" src="../javascripts/booking.js"> </script>
+<script type="text/javascript" src="../javascripts/cart.js"> </script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Cart</h1>
+            <p class="lead fw-normal text-white-50 mb-0"></p>
+        </div>
+    </div>
+</header>
+
+<!--
+ Contact Block -->
+
+{{!-- còn cái phần này là phần giao diện chính của cart khi nào dùng thì mở comment ra là dc --}}
+<!-- cart-->
+<section id="cart" class="contact-section h-500 bg-white">
+    <div class="container py-5">
+        <div class="row g-5">
+            {{!-- phan gio hang --}}
+            <div class="col-md-5 col-lg-4 order-md-last">
+
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-primary">Your cart</span>
+                    <span class="badge bg-primary rounded-pill"></span>
+                </h4>
+                <ul class="list-group mb-3">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th hidden>ID</th>
+                                <th>Name service</th>
+                                <th>Price</th>
+                                <th>Fee service</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody id="data_cart">
+
+
+
+
+                        </tbody>
+
+                    </table>
+
+
+                </ul>
+            </div>
+
+            {{!-- đang cấn đoạn này --}}
+
+
+            {{!-- fill infor listcard --}}
+
+
+
+            <div class="col-md-7 col-lg-8">
+
+                <h4 class="mb-3">Billing address</h4>
+
+                <form id="add1">
+                    <div class="row g-3">
+                        <div class="col-12">
+
+                            <label for="exampleFormControlSelect1">Branch</label>
+
+
+                            <select class="form-control" id="allbranch">
+                                <option value="">-- Select --</option>
+                            </select>
+
+                            <label for="exampleFormControlSelect1">Which Professional</label>
+                            <select class="form-control" id="allemp" onchange="validateSelectBox(this)">
+                                <option value="">-- Select --</option>
+                            </select>
+
+
+                            <label for="date" class="form-label">Choose an appointment date</label>
+                            <input type="date" class="form-control" id="date" placeholder="">
+
+                            <label for="time" class="form-label">Choose time </label>
+                            <input type="time" class="form-control" id="time" placeholder="">
+
+                            <label for="firstName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="Name" placeholder="Name" value="">
+
+                            <label for="email" class="form-label">Email <span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Phone">
+
+                            <label for="phone" class="form-label"></label>
+                        </div>
+                    </div>
+                    <input type="submit" class="w-45 btn btn-primary" value="Payment">
+                </form>
+
+
+                <script language="javascript">
+
+                    function validateSelectBox(obj) {
+
+                        var options = obj.children;
+                        var html = '';
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].selected) {
+                                html += options[i].value;
+                            }
+                        }
+
+                    }
+                </script>
+
+                <script>
+
+                    /*add service từ trang booking*/
+                    const myArrayFromLocalStorage = localStorage.getItem('senddata')
+                    const id_service_arr = JSON.parse(myArrayFromLocalStorage)
+                    console.log(id_service_arr);
+                    /*add service từ trang service*/
+                    var service_from_sv = localStorage.getItem("send_data");
+                    console.log(service_from_sv);
+                    var arr_service;
+                    if (service_from_sv != null && id_service_arr != null) {
+                        console.log(service_from_sv);
+                        service_from_sv = service_from_sv.substr(1);
+                        service_from_sv = service_from_sv.split(',');
+                        /*nối 2 mảng chứa service vào với nhau*/
+                        arr_service = id_service_arr.concat(service_from_sv);
+                    }
+                    else if(service_from_sv == null && id_service_arr != null){
+                        arr_service = id_service_arr;
+                    }
+                    else if(id_service_arr == null ){
+                        service_from_sv = service_from_sv.substr(1);
+                        service_from_sv = service_from_sv.split(',');
+                        arr_service = service_from_sv;
+                    }
+                    else{
+                        console.log("Please add service to cart");
+                    }
+
+
+                    /*function xóa những id_service bị trùng*/
+                    function unique(arr) {
+                        return Array.from(new Set(arr)) //
+                    }
+
+                    var arr_id_service = unique(arr_service);
+                    console.log(arr_id_service);
+
+                    localStorage.setItem("send_arr_service", JSON.stringify(arr_id_service));
+
+                    function Update_cart() {
+                        console.log("dung goi tao");
+                        console.log(arr_id_service);
+
+                        const myArrayFromLocalStoragee = localStorage.getItem('send_arr_service')
+                        const id_service_arrr = JSON.parse(myArrayFromLocalStoragee)
+                        console.log(id_service_arrr);
+
+                        /*var id_service = localStorage.getItem("senddata");
+                        var id_service_arr = id_service;
+                        console.log(id_service_arr);
+                        console.log(id_service);*/
+                        var total_price = 0;
+
+                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
+                        var ele = document.getElementById('data_cart');
+
+                        get_allService((result) => {
+                            /*id_service_arr = id_service_arr.split(',');*/
+                            for (let i = 0; i < id_service_arrr.length; i++) {
+                                for (let j = 0; j < result.length; j++) {
+                                    if (id_service_arrr[i] == result[j].id_service) {
+                                        total_price += result[j].price_service;
+
+                                        ele.innerHTML = ele.innerHTML + "<tr>" +
+                                            "<td hidden>" + result[j].id_service + "</td>" +
+                                            "<td>" + result[j].name_service + "</td>" +
+                                            "<td>" + result[j].price_service + "</td>" +
+                                            "<td>" + 10000 + "</td>" +
+                                            "<td>" + html + "</td></tr>";
+                                    }
+                                }
+                            }
+
+                            total_price += 10000 * id_service_arrr.length;
+                            ele.innerHTML = ele.innerHTML + "<tr>" +
+                                "<td>" + "Total price" + "</td>" +
+                                "<td>" + " " + "</td>" +
+                                "<td>" + " " + "</td>" +
+                                "<td>" + total_price + "</td></tr>";
+
+                            console.log(ele);
+                            /*document.getElementById("list_service").innerHTML = ele;*/
+                            localStorage.setItem("total_price_local", total_price);
+                            console.log(total_price);
+                        })
+                        /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
+
+                    }
+                    Update_cart();
+                </script>
+
+                <script type='text/x-handlebars-template' id='emp-table'></script>
+                <script type='text/x-handlebars-template' id='service-table'></script>
+                <script type='text/x-handlebars-template' id='booking-table'></script>
+
+                <script type='text/x-handlebars-template' id='branch-table'></script>
+                {{!-- function delete row --}}
+                <script>
+
+                    /*var id_service = localStorage.getItem("senddata");*/
+
+                    var myArrayFromLocalStorage1 = localStorage.getItem('send_arr_service')
+                    var id_service_arr1 = JSON.parse(myArrayFromLocalStorage1)
+
+                    console.log(id_service_arr1);
+
+
+                    function deleteRow(r) {
+                        var i = r.parentNode.parentNode.rowIndex;
+                        var j = document.getElementsByTagName("tr")[i];
+                        var index = j.childNodes[0].innerHTML;
+                        console.log(index);
+                        document.getElementById("myTable").deleteRow(i);
+                        console.log(id_service_arr1);
+
+                        for (let i = 0; i < id_service_arr1.length; i++) {
+                            console.log('day nay');
+                            console.log(id_service_arr1[i]);
+                            console.log('day nay1');
+                            console.log(index);
+                            if (id_service_arr1[i] == index) {
+                                id_service_arr1.splice(i, 1);
+                            }
+
+                        }
+                        localStorage.setItem("send_arr_service", JSON.stringify(id_service_arr1));
+                        console.log(id_service_arr1);
+                        console.log('truoc dong clear');
+                        var myobj = document.getElementById("data_cart").innerHTML = "";
+
+                        var myobj = document.getElementById("data_cart");
+                        console.log(myobj);
+                        Update_cart();
+                    }
+                </script>
+
+                <script>
+                    get_allemployee((result) => {
+                        var birds = result;
+                        var ele = document.getElementById('allemp');
+                        for (var i = 0; i <= birds.length; i++) {
+                            // POPULATE SELECT ELEMENT WITH JSON.
+                            ele.innerHTML = ele.innerHTML +
+                                '<option value="' + birds[i].id + '">' + birds[i].name + '</option>';
+                        }
+                    });
+
+                    get_id_branch();
+
+                    /*--------------*/
+
+                </script>
+
+                <script>
+                    var form = document.getElementById('add1');
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault();
+
+                        var myArrayFromLocalStorage2 = localStorage.getItem('send_arr_service')
+                        var id_service_arr2 = JSON.parse(myArrayFromLocalStorage2)
+                        console.log(id_service_arr2);
+
+                        var total_price1 = localStorage.getItem("total_price_local");
+                        var id_emp = document.getElementById('allemp').value;
+                        var id_branch = document.getElementById('allbranch').value;
+                        var date = formatDate(document.getElementById('date').value);
+                        var time = document.getElementById('time').value;
+                        var Name = document.getElementById('Name').value;
+                        var email = document.getElementById('email').value;
+                        var phone = document.getElementById('phone').value;
+                        console.log(id_service_arr2);
+                        console.log(id_branch);
+                        console.log(id_emp);
+                        console.log(date);
+                        console.log(time);
+                        console.log(Name);
+                        console.log(email);
+                        console.log(total_price1);
+                        console.log(phone);
+                        add_booking(date, time, id_branch, Name, phone, email, total_price1, id_emp, id_service_arr2);
+
+
+                    });
+                </script>
+                {{!-- doc cac du lieu va goi api add booking --}}
+
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+{{!-- Cái phần này là cái form để demo thêm 1 service thông qua điền form rồi click nút add_service sẽ gọi api
+add_service --}}

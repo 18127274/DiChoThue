@@ -1,0 +1,200 @@
+<script src="../javascripts/api.js"></script>
+<script type="text/javascript" src="../javascripts/booking.js"> </script>
+<script type="text/javascript" src="../javascripts/cart.js"> </script>
+<script type="text/javascript" src="../javascripts/nc_service.js"> </script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+<!--introservice-->
+<section id="introgallery" class="intro intro-bg bg-overlay parallax text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-md-12 caption-two-panel text-center mt-5 ">
+				<div class="intro-caption mt-5">
+					<h1 class="text-white  mb-2">Service</h1>
+					<p class="text-white mb-4">
+						When you walk into our shop to start your day, we are dedicated to providing you with
+						friendly service, a welcoming atmosphere. If you are not satisfied, please let us know and
+						we will do whatever we can to make things right!.</p>
+				</div>
+			</div>
+		</div>
+</section>
+
+
+<!--service -->
+<section id="testimonial" class="testimonial-section bg-white py-5 h-1000">
+	<div class="container py-5">
+		<div class="row g-5">
+			<!--Category-->
+			<div class="col-md-5 col-lg-4 order-md-last">
+				<!--size font category-->
+				<h4 class="d-flex justify-content-between align-items-center mb-3">
+					<span class="text-primary">Services</span>
+					<br>
+				</h4>
+
+
+				<!--search-->
+				<form class="form-inline my-2 my-lg-2" id="add4">
+					<input class="form-control mr-sm-2" id="search_service" type="search" placeholder="Search"
+						aria-label="Search">
+					<button class="btn btn-primary" type="submit">
+						<i class="fas fa-search fa-sm"></i>
+					</button>
+				</form>
+
+
+				<!--list category-->
+				{{!-- <ul class="list-group mb-3">
+
+
+					<ul class="list-group mb-3">
+						<li class="list-group-item d-flex justify-content-between ">
+							<span>Nail</span>
+						</li>
+						<li class="list-group-item d-flex justify-content-between">
+							<span>salon</span>
+						</li>
+					</ul>
+				</ul> --}}
+			</div>
+
+			<!--product-->
+			<div class="col-md-7 col-lg-8">
+				<h3 class="mb-3 text-primary">Nail services</h3>
+
+				<div class="row" id="allservicess"></div>
+			</div>
+		</div>
+	</div>
+	</div>
+</section>
+
+
+
+
+<script type='text/x-handlebars-template' id='service-table'></script>
+<script type='text/x-handlebars-template' id='service-table1'></script>
+
+<div id="all-r"></div>
+{{!-- them vao gio hang localStorage.setItem("senddata", JSON.stringify(b)); --}}
+<script>
+	var list_service = '';
+	function add_service_tocart(id) {
+		console.log(id);
+		list_service = list_service + ',' + id;
+		localStorage.setItem("send_data", list_service);
+		console.log(list_service);
+	}
+</script>
+<script>
+	var arr_img;
+	for(let i = 1; i < 20; i++){
+		arr_img = arr_img + ',' + 's' + i + '.png';
+	}
+	arr_img = arr_img.split(',');
+	arr_img.shift();
+
+	get_allService((result) => {
+		var birds = result;
+		var ele = document.getElementById('allservicess');
+		for (var i = 0; i <= birds.length; i++) {
+
+			var list_arr_service = "";
+	
+			for (let j = 0; j < result[i].list_product.length; j++) {
+				
+				list_arr_service = list_arr_service + ',' + result[i].list_product[j].name;
+			}
+			list_arr_service = list_arr_service.substr(1);
+
+			// POPULATE SELECT ELEMENT WITH JSON.
+			ele.innerHTML = ele.innerHTML + "<div class=\"col-sm-4 py-3\">" +
+				"<div class=\"card h-100\">" +
+				"<img class=\"card-img-top\" src=\"/"+arr_img[i]+"\" height=\"200\" alt=\"...\" />" +
+				"<div class=\"card-body p-4\">" +
+				"<div class=\"text-center\">" +
+				"<h5 class=\"fw-bolder\">" + birds[i].name_service + "</h5>" +
+				birds[i].price_service + "VNĐ" + "<br>" + "Description: " + birds[i].description  + "<br>" +  "Product service: " + list_arr_service +
+
+				"</div>" +
+				"</div>" +
+				"<div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent\">" +
+				"<div class=\"text-center\">" +
+				"<a class=\"w-55 btn btn-primary\" onclick=\"add_service_tocart(" + birds[i].id_service + ")\" id=\"detai\" >Add to cart</a>" +
+				"</div>" +
+				"</div>" +
+				"</div>" +
+				"</div>";
+		}
+		document.getElementById("allservicess").innerHTML = ele;
+	});
+</script>
+
+<script>
+	function search_service() {
+		document.getElementById("allservicess").innerHTML = "";
+		var temp_service = document.getElementById('search_service').value;
+		console.log(temp_service);
+		getServices_byname(temp_service, (result) => {
+			var birds = result;
+			var ele = document.getElementById('allservicess');
+			for (var i = 0; i <= birds.length; i++) {
+				// POPULATE SELECT ELEMENT WITH JSON.
+				ele.innerHTML = ele.innerHTML + "<div class=\"col-sm-5 py-3\">" +
+					"<div class=\"card h-100\">" +
+					"<img class=\"card-img-top\" src=\"/n-5.png\" height=\"200\" alt=\"...\" />" +
+					"<div class=\"card-body p-4\">" +
+					"<div class=\"text-center\">" +
+					"<h5 class=\"fw-bolder\">" + birds[i].name + "</h5>" +
+					birds[i].price +
+					"</div>" +
+					"</div>" +
+					"<div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent\">" +
+					"<div class=\"text-center\">" +
+					"<a class=\"w-50 btn btn-primary\" id=\"detai\" href=\"/detail\">Detail</a>" +
+					"</div>" +
+					"</div>" +
+					"</div>" +
+					"</div>";
+			}
+			document.getElementById("allservicess").innerHTML = ele;
+		});
+	}
+</script>
+
+
+
+<script>
+	var form = document.getElementById('add4');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+		search_service();
+	});
+
+</script>
+
+<section id="testimonial" class="testimonial-section bg-white py-5 h-1000">
+	<section class="page-section cta">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 mx-auto">
+					<div class="cta-inner bg-faded text-center rounded">
+						<h2 class="section-heading mb-4">
+							<span class="section-heading-upper">Our Promise</span>
+							<span class="section-heading-lower">To You</span>
+						</h2>
+						<p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you
+							with friendly service, a welcoming atmosphere, and above all else, excellent products made
+							with the highest quality ingredients. If you are not satisfied, please let us know and we
+							will do whatever we can to make things right!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</section>
+
+
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/styles2.css" />

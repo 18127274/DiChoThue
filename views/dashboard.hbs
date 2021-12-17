@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+    
+    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Static Navigation - SB Admin</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{!--
+    <link href="css/styles.css" rel="stylesheet" /> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <script src="../javascripts/api.js"></script>
+    <script type="text/javascript" src="../javascripts/cart.js"> </script>
+    <script type="text/javascript" src="../javascripts/booking.js"> </script>
+    <script type="text/javascript" src="../javascripts/nc_service.js"> </script>
+</head>
+
+
+
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Settings</a></li>
+                    <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                    <li>
+                        <hr class="dropdown-divider" />
+                    </li>
+                    <li><a class="dropdown-item" href="#!">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                        <a class="nav-link" href="/dashboard">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Dashboard
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Admin Management</div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Nail Category
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        {{!-- <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout.hbs">Service</a>
+                            </nav>
+                        </div> --}}
+
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
+                                <a class="nav-link" href="/nc_service">List Service</a>
+                                <a class="nav-link" href="/add_service">Add Service</a>
+                                <a class="nav-link" href="/list_product">List Product</a>
+                                <a class="nav-link" href="/add_product">Add Product</a>
+                            </nav>
+                        </div>
+                        <!--branch-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapsebranch" aria-expanded="false" aria-controls="collapsebranch">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Branch
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsebranch" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/list_branch">List Branch</a>
+                                <a class="nav-link" href="/add_branch">Add Branch</a>
+                            </nav>
+                        </div>
+                        <!--employee-->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseemployee" aria-expanded="false" aria-controls="collapseemployee">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Employee
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseemployee" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/list_employee">List Employee</a>
+                                <a class="nav-link" href="/add_employee">Add Employee</a>
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Nail Booking
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/nc_1">Highly Rated Service</a>
+                            </nav>
+                        </div>
+
+                        <!-- muc nail customer -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Nail Customer
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseCustomer" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout.hbs">View Customer</a>
+                                <a class="nav-link" href="layout.hbs">Add Customer</a>
+                                <a class="nav-link" href="layout.hbs">Delete Customer</a>
+                                <a class="nav-link" href="layout.hbs">Update Customer</a>
+                            </nav>
+                        </div>
+
+                        <!-- muc busiess analyst report -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseReport" aria-expanded="false" aria-controls="collapseReport">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Business Analyst
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseReport" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout.hbs">Highly Rated Service</a>
+                            </nav>
+                        </div>
+
+                        <div class="sb-sidenav-menu-heading">Addons</div>
+                        <a class="nav-link" href="charts.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Charts
+                        </a>
+                        <a class="nav-link" href="tables.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Tables
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">Logged in as:</div>
+                    Start Bootstrap
+                </div>
+            </nav>
+        </div>
+
+        <div id="layoutSidenav_content">
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="../views/layouts/layout.hbs">Dashboard</a></li>
+                </ol>
+
+
+                <div class="card shadow mb-2">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Dashboard</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-status" id="table_update_status">
+                    <form class="table-status-content temp" id="add4">
+
+                      
+                        <button type="submit">Login</button>
+                    </form>
+
+                </div>
+
+                <script>
+                    var modal = document.getElementById('table_update_status');
+
+                    // When the user clicks anywhere outside of the modal, close it
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+
+                </script>
+
+                <button onclick="document.getElementById('table_update_status').style.display='block'"
+                    style="width:auto;">cac</button>
+
+
+            </div>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+
+    <link href="../stylesheets/dataTable.bootstrap4.min.css" rel="stylesheet">
+    <script src="../javascripts/jquery.dataTable.min.js"></script>
+    <script src="../javascripts/dataTable.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../javascripts/datatables-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
