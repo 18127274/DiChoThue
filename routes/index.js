@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('home', { title: 'Team7-FE'});
+  res.render('home', { title: 'DICHOTHUE'});
 });
 
 /* router.get('/nc_service', function (req, res, next) {
@@ -91,6 +91,32 @@ router.get('/login', function (req, res, next) {
 router.get('/list_customer', function (req, res, next) {
   res.render('list_customer', {layout: 'admin'}) 
 });
+
+router.get('/supplier', function (req, res, next) {
+  res.render('supplier', {layout: 'admin'}) 
+});
+
+router.get('/sp_add_products', function (req, res, next) {
+  res.render('sp_add_products', {layout: 'admin'}) 
+});
+
+router.get('/sp_list_order', function (req, res, next) {
+  res.render('sp_list_order', {layout: 'admin'}) 
+});
+
+router.get('/sp_list_product', function (req, res, next) {
+  res.render('sp_list_product', {layout: 'admin'}) 
+});
+
+router.get('/shipper', function (req, res, next) {
+  res.render('shipper', {layout: 'admin'}) 
+});
+
+router.get('/shp_list_orders', function (req, res, next) {
+  res.render('shp_list_orders', {layout: 'admin'}) 
+});
+
+
 
 
 /* router.get('/test', function (req, res, next) {
