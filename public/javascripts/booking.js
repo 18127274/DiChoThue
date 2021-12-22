@@ -1,7 +1,8 @@
 function get_allService(callback) {
   var array = [];
-  GET('https://backendsundara.herokuapp.com/service/get-all').then(res =>
+  GET('http://localhost:8080/api/xemdonhang').then(res =>
     res.json().then(data => {
+    
       var template = $('#service-table').html();
       var compiled = Handlebars.compile(template);
 /*            console.log(data.data[0]);
@@ -11,10 +12,22 @@ function get_allService(callback) {
            $('body').append(view); */
 
      /*  var contextualHtml = compiled({ services: data.data}) */
-      var contextualHtml = compiled({ allservices: data.data});
+      var contextualHtml = compiled({ allservices: data});
       $('#allservices').html(contextualHtml);
-      array = data.data;
- 
+      array = data;
+   
+      return callback(array);
+    })
+  );
+}
+
+function get_allServicess(callback) {
+  var array = [];
+  GET('https://localhost:44398/api/demo').then(res =>
+    res.json().then(data => {
+    
+      array = data;
+   
       return callback(array);
     })
   );
