@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+const mongoose = require('mongoose');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -7,21 +8,31 @@ var app = express();
 const fetch = require("node-fetch");
 
 const cors = require('cors');
+// Import function exported by newly installed node modules.
+const Handlebars = require('handlebars')
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
 
 /* https://sundara.herokuapp.com/
 
 https://backendsundara.herokuapp.com */
+/* 
+https://localhost:44304
+http://localhost:8888 
+*/
 
-app.use(cors({ origin: "https://sundara.herokuapp.com/", credentials: true }));
+app.use(cors({ origin: "https://localhost:44304", credentials: true }));
 app.use(function (req, res, next) {
-
-  res.setHeader('Access-Control-Allow-Origin', 'https://sundara.herokuapp.com/');
-  /* res.setHeader('Access-Control-Allow-Origin: *'); */
+  res.setHeader('Access-Control-Allow-Origin', 'https://localhost:44304');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+
+
+
+
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -41,7 +52,8 @@ let expressHbs = require('express-handlebars');
 let hbs = expressHbs.create({
     extname: 'hbs',
     defaultLayout: 'customer',
-    layoutsDir: __dirname + '/views/layouts'
+    layoutsDir: __dirname + '/views/layouts',
+    handlebars: allowInsecurePrototypeAccess(Handlebars)
 });
 app.engine('hbs', hbs.engine);
 // app.set('views', path.join(__dirname, 'views'));
@@ -65,7 +77,10 @@ app.use('/', index_router);
 app.use(function (req, res, next) {
   next(createError(404));
 });
-
+//moi them
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/DICHOTHUE';
+mongoose.connect(MONGODB_URI);
+//
 // error handler
 app.use(function (err, req, res, next) {
   // set locals, only providing error in development

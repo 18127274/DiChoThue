@@ -110,13 +110,14 @@ function Login(username, password, callback) {
 
 function get_Products(callback) {
   var array = [];
-  GET('https://backendsundara.herokuapp.com/product/get-all').then(res =>
+  GET('https://localhost:44304/api/nhacungcap').then(res =>
     res.json().then(data => {
       var template = $('#product-table').html();
       var compiled = Handlebars.compile(template);
       var contextualHtml = compiled({ allservices: data.data });
       $('#listproduct').html(contextualHtml);
       array = data.data;
+      console.log(data.data);
       return callback(array);
     })
   );

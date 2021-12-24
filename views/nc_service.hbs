@@ -110,6 +110,20 @@
                                 <a class="nav-link" href="/add_employee">Add Employee</a>
                             </nav>
                         </div>
+
+                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Supplier
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="/list_product">Supplier</a>
+                            </nav>
+                        </div>
+
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
                             aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
@@ -122,12 +136,6 @@
                                 <a class="nav-link" href="/admin_booking">Booking Managed</a>
                             </nav>
                         </div>
-
-               
-
-                
-
-
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -144,8 +152,7 @@
 
                 </ol>
 
-
-
+            
                 <!-- delete row -->
                 <script>
                     function deleteRow(r) {
@@ -162,25 +169,9 @@
                         } else {
 
                         }
-
                     }
                 </script>
 
-                <script type='text/x-handlebars-template' id='service-table'> </script>
-                <script type='text/x-handlebars-template' id='data_table_service'> </script>
-            
-
-                <div></div>
-
-                <!--search
-                <form class="form-inline my-2 my-lg-2" id="add5">
-                    <input class="form-control mr-sm-2" id="search_service" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </form>
-                -->
                 <div class="mt-4 mb-4">
                     <form class="d-none d-sm-inline-block form-inline  navbar-search" id="add5">
                         <div class="input-group">
@@ -195,7 +186,75 @@
                     </form>
 
                 </div>
+
+                    <!-- Table -->
+                <div class="card shadow mb-2">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">List service</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Ma Don Hang</th>
+                                        <th>Ma shipper</th>
+                                        <th>Phi ship</th>
+                                        <th>Tong tien</th>
+                                        <th>Tinh trang thanh toan</th>
+                                        <th>Ngay lap don</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="data_table_service">
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                
                 <script type='text/x-handlebars-template' id='service-table1'></script>
+                <script type='text/x-handlebars-template' id='service-table'> </script>
+                <script type='text/x-handlebars-template' id='data_table_service'> </script>
+                
+                {{!-- đổ dữ liệu lên table --}}
+                <script>           
+                    get_allService((result) => {
+                        var birds = result;
+                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
+                        var ele = document.getElementById('data_table_service');                     
+                        console.log(birds);
+                        console.log(birds.length);
+                        console.log(birds[0].maShipper);  
+                        console.log(birds[0].phiShip);   
+                        console.log(birds[0].tongTien);
+                        console.log(birds[0].tinhTrangThanhToan);
+                        console.log(birds[0].ngayLapDon);
+
+                        for (var i = 0; i < birds.length; i++) {                                           
+                            // POPULATE SELECT ELEMENT WITH JSON.
+                            ele.innerHTML = ele.innerHTML + "<tr>" +
+                                "<td>" + birds[i].maDH + "</td>" +
+                                "<td>" + birds[i].maShipper + "</td>" +
+                                "<td>" + birds[i].phiShip + "</td>" +
+                                "<td>" + birds[i].tongTien + "</td>" +
+                                "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
+                                "<td>" + birds[i].ngayLapDon + "</td>" +
+                                "<td>" + html + "</td></tr>";
+                        }
+                        
+
+                        document.getElementById("data_table_service").innerHTML = ele.innerHTML;
+                    });
+                </script>
+
+                
                 {{!-- search service --}}
                 <script>
                     function search_service() {
@@ -231,78 +290,15 @@
                     });
 
                 </script>
-                <!-- Table -->
-                <div class="card shadow mb-2">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">List service</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Ma Don Hang</th>
-                                        <th>Ma shipper</th>
 
-                                        <th>Phi ship</th>
-                                        <th>Tong tien</th>
+               
 
-                                        <th>Tinh trang thanh toan</th>
-
-                                        <th>Ngay lap don</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody id="data_table_service">
-
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
+               
+               
 
             </div>
 
-                {{!-- đổ dữ liệu lên table --}}
-                <script>
-                    
-                        
-                   
-                    get_allService((result) => {
-
-                        var birds = result;
-
-                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                        var ele = document.getElementById('data_table_service');
-                        
-                        console.log(birds);
-                        console.log(typeof birds);
-                        console.log(birds[0]["maDH"]);
-                        console.log(birds[0].maDH);
-
-
-
-                     
-
-                        console.log(birds[1]);
-                        for (var i = 0; i <= birds.length; i++) {
-                                             
-                            // POPULATE SELECT ELEMENT WITH JSON.
-                            ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + birds[i].MADH + "</td>" +
-                                "<td>" + birds[i].MASHIPPER + "</td>" +
-                                "<td>" + birds[i].PHISHIP + "</td>" +
-                                "<td>" + birds[i].TongTien + "</td>" +
-                                "<td>" + birds[i].TinhTrangThanhToan + "</td>" +
-                                "<td>" + birds[i].NgayLapDon + "</td>" +
-                                "<td>" + html + "</td></tr>";
-                        }
-                        document.getElementById("data_table_service").innerHTML = ele;
-                    });
-                </script>
+           
 
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
