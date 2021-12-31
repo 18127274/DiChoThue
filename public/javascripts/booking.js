@@ -1,21 +1,19 @@
+/* http://localhost:8081/api/nhacungcap */
+
+/* http://localhost:8080/api/xemdonhang */
+
 function get_allService(callback) {
   var array = [];
-  GET('http://localhost:8080/api/xemdonhang').then(res =>
+  GET('http://localhost:8082/api/xemdonhang').then(res =>
     res.json().then(data => {
     
       var template = $('#service-table').html();
       var compiled = Handlebars.compile(template);
-/*            console.log(data.data[0]);
-           var view = compiled('data.data[0]');
-           console.log(view);
-           $('#services').html(view);
-           $('body').append(view); */
 
-     /*  var contextualHtml = compiled({ services: data.data}) */
       var contextualHtml = compiled({ allservices: data});
       $('#allservices').html(contextualHtml);
       array = data;
-   
+      
       return callback(array);
     })
   );

@@ -21,17 +21,14 @@ https://localhost:44304
 http://localhost:8888 
 */
 
-app.use(cors({ origin: "https://localhost:44304", credentials: true }));
+/* app.use(cors({ origin: ["https://localhost:8081", 'https://localhost:8080', 'https://localhost:8888'], credentials: true }));
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://localhost:44304');
+  res.setHeader('Access-Control-Allow-Origin', 'https://localhost:8081', 'https://localhost:8080', 'https://localhost:8888');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
-});
-
-
-
+}); */
 
 app.use(express.json());
 app.use(
@@ -69,6 +66,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'img')));
 app.use(express.static(path.join(__dirname, 'font-awesome')));
 /* app.use(express.static(path.join(__dirname, 'views'))); */
+
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+  next();
+});
+
 const index_router = require('./routes/index');
 
 app.use('/', index_router);
@@ -80,6 +83,8 @@ app.use(function (req, res, next) {
 //moi them
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/DICHOTHUE';
 mongoose.connect(MONGODB_URI);
+
+
 //
 // error handler
 app.use(function (err, req, res, next) {

@@ -110,7 +110,7 @@ function Login(username, password, callback) {
 
 function get_Products(callback) {
   var array = [];
-  GET('https://localhost:44304/api/nhacungcap').then(res =>
+  GET('http://localhost:8081/api/nhacungcap').then(res =>
     res.json().then(data => {
       var template = $('#product-table').html();
       var compiled = Handlebars.compile(template);
@@ -118,6 +118,7 @@ function get_Products(callback) {
       $('#listproduct').html(contextualHtml);
       array = data.data;
       console.log(data.data);
+      console.log(data);
       return callback(array);
     })
   );

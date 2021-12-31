@@ -1,15 +1,20 @@
 function GET(address) {
     return fetch(address, {
+        mode: 'cors',
         method: 'GET',
         headers: {
+            /* 'Access-Control-Allow-Origin' : '*', */
+            
             Accept: 'application/json',
-        },
+
+        },     
+        
     });
 }
 
 function POST(address, body) {
     return fetch(address, {
-
+        mode: 'cors',
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -21,6 +26,7 @@ function POST(address, body) {
 
 function DELETE(address, body) {
     return fetch(address, {
+        mode: 'cors',
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
@@ -31,6 +37,7 @@ function DELETE(address, body) {
 
 function PUT(address, body) {
     return fetch(address, {
+        mode: 'cors',
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
