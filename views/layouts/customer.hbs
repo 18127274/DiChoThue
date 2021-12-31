@@ -21,11 +21,13 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <script src="../javascripts/api.js"></script>
+
+
 </head>
 
 <body>
     <!-- Top navigation -->
-    <nav class="navbar navbar-expand-md fixed-top top-nav">
+    <nav class="navbar navbar-expand-md top-nav">
         <div class="container-fluid">
             <a class="navbar-brand" href="/home"><strong>ĐI CHỢ ONLINE</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -35,7 +37,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav m-auto text-sm-center text-md-center">
-                 {{!--    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
@@ -45,7 +47,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/service">Đặt Hàng</a>
                     </li>
-                 
+
                     <li class="nav-item">
                         <a class="nav-link" href="/location">????</a>
                     </li>
@@ -58,9 +60,30 @@
                 </li>
             </ul>
             -->
+
+
+
             <a class="nav-link" href="/cart"><i class="fa fa-shopping-cart text-white"></i></a>
+
+            <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#!">Settings</a></li>
+                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li>
+                            <hr class="dropdown-divider" />
+                        </li>
+                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+
         </div>
-    </nav> 
+    </nav>
+
+
 
     <!-- Intro Three -->
     {{!-- <section id="home" class="intro intro-bg bg-overlay parallax text-center">
@@ -111,14 +134,21 @@
             &copy; Copyright <span id="year"></span>. Salon Sundara <i class="fa fa-heart"></i>
         </div>
     </div>
-    
+
+    <script src="../javascripts/jquery.dataTable.min.js"></script>
+    <script src="../javascripts/dataTable.bootstrap4.min.js"></script>
+
     <!-- Javascript Files  -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-{{!--     <script src="../../javascripts/popper.min.js"></script> --}}
+    {{!--
+    <script src="../../javascripts/popper.min.js"></script> --}}
     <script src="../../javascripts/form-validation.js"></script>
-{{!--     <script src="../../javascripts/bootstrap.min.js"></script> --}}
-   {{!--  <script async deffer type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key= AIzaSyB52BfJHBtqiqYBn_D4ZUqujiWxAOiRyTc&callback=initMap"></script> --}}
+    {{!--
+    <script src="../../javascripts/bootstrap.min.js"></script> --}}
+    {{!--
+    <script async deffer type="text/javascript"
+        src="https://maps.google.com/maps/api/js?key= AIzaSyB52BfJHBtqiqYBn_D4ZUqujiWxAOiRyTc&callback=initMap"></script>
+    --}}
     <script src="../../javascripts/gmap-custom.js"></script>
     <script src="../../javascripts/core.js"></script>
 
