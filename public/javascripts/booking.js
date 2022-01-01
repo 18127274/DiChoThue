@@ -4,7 +4,7 @@
 
 function get_allService(callback) {
   var array = [];
-  GET('http://localhost:8082/api/xemdonhang').then(res =>
+  GET('http://localhost:8081/api/sanpham').then(res =>
     res.json().then(data => {
     
       var template = $('#service-table').html();
@@ -13,7 +13,7 @@ function get_allService(callback) {
       var contextualHtml = compiled({ allservices: data});
       $('#allservices').html(contextualHtml);
       array = data;
-      
+      console.log(array);
       return callback(array);
     })
   );

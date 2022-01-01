@@ -60,3 +60,40 @@
 
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/styles2.css" />
+
+
+     <div class="row g-3">
+                        <div class="col-12">
+
+                            <label for="exampleFormControlSelect1">Branch</label>
+
+
+                            <select class="form-control" id="allbranch">
+                                <option value="">-- Select --</option>
+                            </select>
+
+                            <label for="exampleFormControlSelect1">Which Professional</label>
+                            <select class="form-control" id="allemp" onchange="validateSelectBox(this)">
+                                <option value="">-- Select --</option>
+                            </select>
+
+
+                            <label for="date" class="form-label">Choose an appointment date</label>
+                            <input type="date" class="form-control" id="date" placeholder="">
+
+                            <label for="time" class="form-label">Choose time </label>
+                            <input type="time" class="form-control" id="time" placeholder="">
+
+                            <label for="firstName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="Name" placeholder="Name" value="">
+
+                            <label for="email" class="form-label">Email <span
+                                    class="text-muted">(Optional)</span></label>
+                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="phone" placeholder="Phone">
+
+                            <label for="phone" class="form-label"></label>
+                        </div>
+                    </div>

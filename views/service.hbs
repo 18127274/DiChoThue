@@ -13,36 +13,7 @@
 		<div class="row g-5">
 			<!--Category-->
 			<div class="col-md-5 col-lg-4 order-md-last">
-				<!--size font category-->
-				{{!-- <h4 class="d-flex justify-content-between align-items-center mb-3">
-					<span class="text-primary">Services</span>
-					<br>
-				</h4>
 
-
-				<!--search-->
-				<form class="form-inline my-2 my-lg-2" id="add4">
-					<input class="form-control mr-sm-2" id="search_service" type="search" placeholder="Search"
-						aria-label="Search">
-					<button class="btn btn-primary" type="submit">
-						<i class="fas fa-search fa-sm"></i>
-					</button>
-				</form> --}}
-
-
-				<!--list category-->
-				{{!-- <ul class="list-group mb-3">
-
-
-					<ul class="list-group mb-3">
-						<li class="list-group-item d-flex justify-content-between ">
-							<span>Nail</span>
-						</li>
-						<li class="list-group-item d-flex justify-content-between">
-							<span>salon</span>
-						</li>
-					</ul>
-				</ul> --}}
 
 				
 			</div>
@@ -148,26 +119,27 @@
 
 			var list_arr_service = "";
 
-			for (let j = 0; j < result[i].list_product.length; j++) {
+			for (let j = 0; j < result.length; j++) {
 
-				list_arr_service = list_arr_service + ',' + result[i].list_product[j].name;
+				list_arr_service = list_arr_service + ',' + result[j].tenSP;
 			}
 			list_arr_service = list_arr_service.substr(1);
-
+			
+			console.log(list_arr_service);
 			// POPULATE SELECT ELEMENT WITH JSON.
 			ele.innerHTML = ele.innerHTML + "<div class=\"col-sm-4 py-3\">" +
 				"<div class=\"card h-100\">" +
 				"<img class=\"card-img-top\" src=\"/" + arr_img[i] + "\" height=\"200\" alt=\"...\" />" +
 				"<div class=\"card-body p-4\">" +
 				"<div class=\"text-center\">" +
-				"<h5 class=\"fw-bolder\">" + birds[i].name_service + "</h5>" +
-				birds[i].price_service + "VNĐ" + "<br>" + "Description: " + birds[i].description + "<br>" + "Product service: " + list_arr_service +
+				"<h5 class=\"fw-bolder\">" + birds[i].tenSP + "</h5>" +
+				birds[i].giaTien + " VNĐ" + "<br>" +
 
 				"</div>" +
 				"</div>" +
 				"<div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent\">" +
 				"<div class=\"text-center\">" +
-				"<a class=\"w-55 btn btn-primary\" onclick=\"add_service_tocart(" + birds[i].id_service + ")\" id=\"detai\" >Add to cart</a>" +
+				"<a class=\"w-55 btn btn-primary\" onclick=\"add_service_tocart(" + birds[i].id + ")\" id=\"detai\" >Add to cart</a>" +
 				"</div>" +
 				"</div>" +
 				"</div>" +

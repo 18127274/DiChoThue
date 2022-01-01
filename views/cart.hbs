@@ -19,9 +19,27 @@
 <!-- cart-->
 <section id="cart" class="contact-section h-500 bg-white">
     <div class="container py-5">
+
+        
         <div class="row g-5">
             {{!-- phan gio hang --}}
-            <div class="col-md-5 col-lg-4 order-md-last">
+           
+
+            {{!-- đang cấn đoạn này --}}
+
+
+            {{!-- fill infor listcard --}}
+
+
+            
+            
+
+            <div class="col-md-7 col-lg-8">
+
+                <h4 class="mb-3">Billing address</h4>
+
+
+                 <div class="col-md-5 col-lg-4 order-md-last">
 
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
@@ -34,7 +52,6 @@
                                 <th hidden>ID</th>
                                 <th>Name service</th>
                                 <th>Price</th>
-                                <th>Fee service</th>
                                 <th>Action</th>
 
                             </tr>
@@ -52,54 +69,10 @@
 
                 </ul>
             </div>
-
-            {{!-- đang cấn đoạn này --}}
-
-
-            {{!-- fill infor listcard --}}
-
-
-
-            <div class="col-md-7 col-lg-8">
-
-                <h4 class="mb-3">Billing address</h4>
+                
 
                 <form id="add1">
-                    <div class="row g-3">
-                        <div class="col-12">
-
-                            <label for="exampleFormControlSelect1">Branch</label>
-
-
-                            <select class="form-control" id="allbranch">
-                                <option value="">-- Select --</option>
-                            </select>
-
-                            <label for="exampleFormControlSelect1">Which Professional</label>
-                            <select class="form-control" id="allemp" onchange="validateSelectBox(this)">
-                                <option value="">-- Select --</option>
-                            </select>
-
-
-                            <label for="date" class="form-label">Choose an appointment date</label>
-                            <input type="date" class="form-control" id="date" placeholder="">
-
-                            <label for="time" class="form-label">Choose time </label>
-                            <input type="time" class="form-control" id="time" placeholder="">
-
-                            <label for="firstName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="Name" placeholder="Name" value="">
-
-                            <label for="email" class="form-label">Email <span
-                                    class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Phone">
-
-                            <label for="phone" class="form-label"></label>
-                        </div>
-                    </div>
+               
                     <input type="submit" class="w-45 btn btn-primary" value="Payment">
                 </form>
 
@@ -180,23 +153,20 @@
                             /*id_service_arr = id_service_arr.split(',');*/
                             for (let i = 0; i < id_service_arrr.length; i++) {
                                 for (let j = 0; j < result.length; j++) {
-                                    if (id_service_arrr[i] == result[j].id_service) {
-                                        total_price += result[j].price_service;
+                                    if (id_service_arrr[i] == result[j].id) {
+                                        total_price += result[j].giaTien;
 
                                         ele.innerHTML = ele.innerHTML + "<tr>" +
-                                            "<td hidden>" + result[j].id_service + "</td>" +
-                                            "<td>" + result[j].name_service + "</td>" +
-                                            "<td>" + result[j].price_service + "</td>" +
-                                            "<td>" + 10000 + "</td>" +
+                                            "<td hidden>" + result[j].id + "</td>" +
+                                            "<td>" + result[j].tenSP + "</td>" +
+                                            "<td>" + result[j].giaTien + "</td>" +
                                             "<td>" + html + "</td></tr>";
                                     }
                                 }
                             }
 
-                            total_price += 10000 * id_service_arrr.length;
                             ele.innerHTML = ele.innerHTML + "<tr>" +
                                 "<td>" + "Total price" + "</td>" +
-                                "<td>" + " " + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + total_price + "</td></tr>";
 
