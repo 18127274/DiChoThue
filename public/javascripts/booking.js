@@ -19,17 +19,26 @@ function get_allService(callback) {
   );
 }
 
-function get_allServicess(callback) {
-  var array = [];
-  GET('https://localhost:44398/api/demo').then(res =>
-    res.json().then(data => {
-    
-      array = data;
-   
-      return callback(array);
-    })
+function Register_account_Customer(id, name, username, pass, phone, email, address, area) {
+  POST('http://localhost:8081/api/khachhang', {
+      "id": id,
+      "Hoten": name,
+      "Tendangnhap": username,
+      "Matkhau": pass,
+      "Sdt": phone,
+      "Email": email,
+      "Diachi": address,
+      "Mavung": area
+  }).then(res =>
+      res.json().then(data => {
+          console.log(data);
+          console.log("cac");
+
+      })
   );
 }
+
+
 
 function getServices() {
   var listdata;

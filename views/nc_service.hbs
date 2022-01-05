@@ -231,21 +231,13 @@
                         var ele = document.getElementById('data_table_service');                     
                         console.log(birds);
                         console.log(birds.length);
-                        console.log(birds[0].maShipper);  
-                        console.log(birds[0].phiShip);   
-                        console.log(birds[0].tongTien);
-                        console.log(birds[0].tinhTrangThanhToan);
-                        console.log(birds[0].ngayLapDon);
+                        console.log(birds[0].tenSP);  
+
 
                         for (var i = 0; i < birds.length; i++) {                                           
                             // POPULATE SELECT ELEMENT WITH JSON.
                             ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + birds[i].maDH + "</td>" +
-                                "<td>" + birds[i].maShipper + "</td>" +
-                                "<td>" + birds[i].phiShip + "</td>" +
-                                "<td>" + birds[i].tongTien + "</td>" +
-                                "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
-                                "<td>" + birds[i].ngayLapDon + "</td>" +
+                                "<td>" + birds[i].tenSP + "</td>" +
                                 "<td>" + html + "</td></tr>";
                         }
                         

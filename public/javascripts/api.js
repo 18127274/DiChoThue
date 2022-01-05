@@ -4,9 +4,7 @@ function GET(address) {
         method: 'GET',
         headers: {
             /* 'Access-Control-Allow-Origin' : '*', */
-            
             Accept: 'application/json',
-
         },     
         
     });

@@ -87,7 +87,7 @@ function get_allcategory(callback) {
 
 
 
-function Login(username, password, callback) {
+function Login(username, password) {
   var array = [];
   POST('https://backendsundara.herokuapp.com/admin/login', {
     "username": username,

@@ -116,6 +116,9 @@ router.get('/shp_list_orders', function (req, res, next) {
   res.render('shp_list_orders', {layout: 'admin'}) 
 });
 
+router.get('/register', function (req, res, next) {
+  res.render('register', {layout: 'admin'}) 
+});
 
 
 

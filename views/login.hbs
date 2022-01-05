@@ -1,306 +1,193 @@
-<!--
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
 
-        /* Full-width input fields */
-        input[type=text],
-        input[type=password] {
-            width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-        }
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
-        /* Set a style for all buttons */
-        button {
-            background-color: #04AA6D;
-            color: white;
-            padding: 14px 14px;
-            margin: 8px 0px;
-            border: none;
-            cursor: pointer;
-            width: 30%;
-        }
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
 
-        button:hover {
-            opacity: 0.8;
-        }
+button:hover {
+  opacity: 0.8;
+}
 
-        /* Extra styles for the cancel button */
-        .cancelbtn {
-            width: auto;
-            padding: 10px 18px;
-            background-color: #f44336;
-        }
+/* Extra styles for the cancel button */
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
 
-        /* Center the image and position the close button */
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
 
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
 
-        .container {
-            padding: 8px;
-        }
+.container {
+  padding: 16px;
+}
 
-        span.psw {
-            float: right;
-            padding-top: 16px;
-        }
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
 
-        /* The Modal (background) */
-        .modal {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            /* Stay in place */
-            z-index: 1;
-            /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            /* Full width */
-            height: 100%;
-            /* Full height */
-            overflow: auto;
-            /* Enable scroll if needed */
-            background-color: rgb(0, 0, 0);
-            /* Fallback color */
-            background-color: rgba(0, 0, 0, 0.4);
-            /* Black w/ opacity */
-            padding-top: 60px;
-        }
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+}
 
-        /* Modal Content/Box */
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto;
-            /* 5% from the top, 15% from the bottom and centered */
-            border: 1px solid #888;
-            width: 80%;
-            /* Could be more or less, depending on screen size */
-        }
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
 
-        /* The Close Button (x) */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0;
-            color: #000;
-            font-size: 35px;
-            font-weight: bold;
-        }
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 25px;
+  top: 0;
+  color: #000;
+  font-size: 35px;
+  font-weight: bold;
+}
 
-        .close:hover,
-        .close:focus {
-            color: red;
-            cursor: pointer;
-        }
+.close:hover,
+.close:focus {
+  color: red;
+  cursor: pointer;
+}
 
-        /* Add Zoom Animation */
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s
-        }
+/* Add Zoom Animation */
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
 
-        @-webkit-keyframes animatezoom {
-            from {
-                -webkit-transform: scale(0)
-            }
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
 
-            to {
-                -webkit-transform: scale(1)
-            }
-        }
-
-        @keyframes animatezoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        /* Change styles for span and cancel button on extra small screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
-        }
-    </style>
-    <script src="../javascripts/nc_service.js"></script>
-    <script src="../javascripts/api.js"></script>
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
 </head>
 
+<script src="../javascripts/api.js"></script>
+<script type="text/javascript" src="../javascripts/booking.js"> </script>
+<script type="text/javascript" src="../javascripts/cart.js"> </script>
+<script type="text/javascript" src="../javascripts/nc_service.js"> </script>
 <body>
 
-    <h2>Login Admin</h2>
+<h2>Modal Login Form</h2>
 
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
 
-    <div id="id01" class="modal">
-
-        <form class="modal-content animate" id="form_login" action="/action_page.php" method="post">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close"
-                    title="Close Modal">&times;</span>
-            </div>
-
-            <div class="container">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" id="user" placeholder="Enter Username" name="uname" required>
-                
-                <label for="psw"><b>Password</b></label>
-                <input type="password" id="pass" placeholder="Enter Password" name="psw" required>
-
-                <button type="submit">Login</button>
-            </div>
-
-            <div class="container" style="background-color:#f1f1f1">
-            </div>
-        </form>
+<div id="id01" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php" method="post" id = "add1">
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+      <img src="img_avatar2.png" alt="Avatar" class="avatar">
     </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById('id01');
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        var form = document.getElementById('form_login');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var username = document.getElementById("user").value;
-            var pass = document.getElementById("pass").value;
-            console.log(username);
-            console.log(pass);
-            Login(username, pass);
-        });
-    </script>
-
-</body>
-
-</html>
--->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Login</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="../stylesheets/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="../stylesheets/sb-admin-2.min.css" rel="stylesheet">
-    <script src="../javascripts/nc_service.js"></script>
-    <script src="../javascripts/api.js"></script>
-</head>
-
-<body class="bg-gradient-primary">
 
     <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" id = "username" required>
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome to Sundara</h1>
-                                    </div>
-                                    <form class="user" id="form_login" >
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="user" aria-describedby="emailHelp"
-                                                placeholder="Enter username...">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                id="pass" placeholder="Enter password...">
-                                        </div>
-                                        
-                                        
-                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" id = "pass" required>
+        
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../javascripts/jquery.min.js"></script>
-    <script src="../javascripts/bootstrap.bundle.min.js"></script>
+    <div class="container" style="background-color:#f1f1f1">
+      
+      <button class="psw" style="width:auto;">Đăng ký<a href="http://localhost:8888/register"></a></button>
+    </div>
+  </form>
+</div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="../public/javascripts/jquery.easing.min.js"></script>
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
 
-    <!-- Custom scripts for all pages-->
-    <script src="../public/javascripts/sb-admin-2.min.js"></script>
-    <script>
-        
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
-        var form = document.getElementById('form_login');
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-            var username = document.getElementById("user").value;
-            var pass = document.getElementById("pass").value;
-            console.log(username);
-            console.log(pass);
-            Login(username, pass);
-        });
-    </script>
+<script>
+
+    var form = document.getElementById('add1');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        var usern = document.getElementById('username').value;
+        var password = document.getElementById('pass').value;
+       
+        Login(usern, pass);
+    });
+</script>
+
 </body>
-
 </html>
