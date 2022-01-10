@@ -71,31 +71,38 @@ function getbranch_byname(name, callback) {
   );
 }
 
-function get_allcategory(callback) {
+/* function getid_khachhang(username,callback) {
   var array = [];
-  GET('https://backendsundara.herokuapp.com/category/get-all').then(res =>
+  GET('http://localhost:8081/api/khachhang' + username).then(res =>
     res.json().then(data => {
-      var template = $('#service-table2').html();
+      var template = $('#login-table').html();
       var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices1: data.data });
-      $('#allservices1').html(contextualHtml);
-      array = data.data;
+      var contextualHtml = compiled({ allcus: data });
+      $('#allcus').html(contextualHtml);
+      array = data;
       return callback(array);
     })
   );
 }
+ */
+
+
 
 
 
 function dangnhap_khachhang(username, password) {
   var array = [];
-  
+
   GET('http://localhost:8080/api/dangnhap_khachhang/'+username+'/'+password+'').then(res =>
     res.json().then(data => {
-      console.log(data);
+      console.log(typeof(data));
       console.log(data.length);
       if (data.length > 0) {
-        window.location.assign("http://localhost:8888/booking");
+ /*        console.log(data[0].id);
+        console.log(data); */
+       /*  localStorage.setItem("senddata_login", JSON. JSON.stringify(data[0].id)); */
+       localStorage.setItem("senddata_login", JSON.stringify(data));
+        /* window.location.assign("http://localhost:8888/service"); */
         console.log("cac");
       }
       else {
@@ -105,6 +112,22 @@ function dangnhap_khachhang(username, password) {
   );
 }
 
+/* function getinforcus_byid(,callback) {
+  var array = [];
+  GET('http://localhost:8081/api/khachhang').then(res =>
+    res.json().then(data => {
+    
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data});
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+} */
 
 
 function get_Products(callback) {
