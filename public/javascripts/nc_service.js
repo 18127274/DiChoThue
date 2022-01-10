@@ -87,16 +87,15 @@ function get_allcategory(callback) {
 
 
 
-function Login(username, password) {
+function dangnhap_khachhang(username, password) {
   var array = [];
-  POST('https://backendsundara.herokuapp.com/admin/login', {
-    "username": username,
-    "password": password
-  }).then(res =>
+  
+  GET('http://localhost:8080/api/dangnhap_khachhang/'+username+'/'+password+'').then(res =>
     res.json().then(data => {
       console.log(data);
-      if (data.code == 0) {
-        window.location.assign("https://sundara.herokuapp.com/nc_service");
+      console.log(data.length);
+      if (data.length > 0) {
+        window.location.assign("http://localhost:8888/booking");
         console.log("cac");
       }
       else {
