@@ -7370,7 +7370,7 @@ textarea.form-control-lg {
 
 /* rtl:end:remove */
 .text-primary {
-  color: #b5838d !important; 
+  color: #FFAE00 !important; 
 }
 
 .text-secondary {
@@ -7426,7 +7426,7 @@ textarea.form-control-lg {
 }
 
 .bg-primary {
-  background-color: #b5838d !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .bg-secondary {

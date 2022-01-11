@@ -81,8 +81,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 //moi them
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/DICHOTHUE';
-mongoose.connect(MONGODB_URI);
+
 
 
 //
