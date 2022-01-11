@@ -20,10 +20,10 @@
 <section id="cart" class="contact-section h-500 bg-white">
     <div class="container py-5">
 
-        
+
         <div class="row g-5">
             {{!-- phan gio hang --}}
-           
+
 
             {{!-- đang cấn đoạn này --}}
 
@@ -31,48 +31,50 @@
             {{!-- fill infor listcard --}}
 
 
-            
-            
+
+
 
             <div class="col-md-7 col-lg-8">
 
                 <h4 class="mb-3">Billing address</h4>
 
 
-                 <div class="col-md-5 col-lg-4 order-md-last">
+                <div class="col-md-5 col-lg-4 order-md-last">
 
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Your cart</span>
-                    <span class="badge bg-primary rounded-pill"></span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th hidden>ID</th>
-                                <th>Name service</th>
-                                <th>Price</th>
-                                <th>Action</th>
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Your cart</span>
+                        <span class="badge bg-primary rounded-pill"></span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th hidden>ID</th>
+                                    <th> </th>
+                                  
+                                    <th>Name service</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
 
-                            </tr>
-                        </thead>
+                                </tr>
+                            </thead>
 
-                        <tbody id="data_cart">
-
-
-
-
-                        </tbody>
-
-                    </table>
+                            <tbody id="data_cart">
 
 
-                </ul>
-            </div>
-                
+
+
+                            </tbody>
+
+                        </table>
+
+
+                    </ul>
+                </div>
+
 
                 <form id="add1">
-               
+
                     <input type="submit" class="w-45 btn btn-primary" value="Payment">
                 </form>
 
@@ -109,15 +111,15 @@
                         /*nối 2 mảng chứa service vào với nhau*/
                         arr_service = id_service_arr.concat(service_from_sv);
                     }
-                    else if(service_from_sv == null && id_service_arr != null){
+                    else if (service_from_sv == null && id_service_arr != null) {
                         arr_service = id_service_arr;
                     }
-                    else if(id_service_arr == null ){
+                    else if (id_service_arr == null) {
                         service_from_sv = service_from_sv.substr(1);
                         service_from_sv = service_from_sv.split(',');
                         arr_service = service_from_sv;
                     }
-                    else{
+                    else {
                         console.log("Please add service to cart");
                     }
 
@@ -147,6 +149,8 @@
                         var total_price = 0;
 
                         var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
+                        var html1 = "<input type=\"checkbox\">";
+
                         var ele = document.getElementById('data_cart');
 
                         get_allService((result) => {
@@ -156,8 +160,10 @@
                                     if (id_service_arrr[i] == result[j].id) {
                                         total_price += result[j].giaTien;
 
-                                        ele.innerHTML = ele.innerHTML + "<tr>" +
-                                            "<td hidden>" + result[j].id + "</td>" +
+                                        ele.innerHTML = ele.innerHTML + "<tr>" + 
+                                            "<td hidden>" + result[j].id + "</td>" + 
+                                      
+                                            "<td>" + html1 + "</td>" +                                                                                                                               
                                             "<td>" + result[j].tenSP + "</td>" +
                                             "<td>" + result[j].giaTien + "</td>" +
                                             "<td>" + html + "</td></tr>";
@@ -167,6 +173,7 @@
 
                             ele.innerHTML = ele.innerHTML + "<tr>" +
                                 "<td>" + "Total price" + "</td>" +
+                                "<td>" + " " + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + total_price + "</td></tr>";
 
