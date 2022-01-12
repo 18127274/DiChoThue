@@ -19,9 +19,8 @@ function get_allService(callback) {
   );
 }
 
-function Register_account_Customer(id, name, username, pass, phone, email, address, area) {
+function Register_account_Customer(name, username, pass, phone, email, address, area) {
   POST('http://localhost:8081/api/khachhang', {
-      "id": id,
       "Hoten": name,
       "Tendangnhap": username,
       "Matkhau": pass,
@@ -32,7 +31,6 @@ function Register_account_Customer(id, name, username, pass, phone, email, addre
   }).then(res =>
       res.json().then(data => {
           console.log(data);
-          console.log("cac");
 
       })
   );

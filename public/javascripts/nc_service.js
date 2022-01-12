@@ -95,19 +95,14 @@ function dangnhap_khachhang(username, password) {
 
   GET('http://localhost:8080/api/dangnhap_khachhang/'+username+'/'+password+'').then(res =>
     res.json().then(data => {
-      console.log(typeof(data));
-      console.log(data.length);
       if (data.length > 0) {
- /*        console.log(data[0].id);
-        console.log(data); */
-       /*  localStorage.setItem("senddata_login", JSON. JSON.stringify(data[0].id)); */
-       localStorage.setItem("senddata_login", JSON.stringify(data));
-        /* window.location.assign("http://localhost:8888/service"); */
-        console.log("cac");
+        localStorage.setItem("senddata_login", JSON.stringify(data));
+        window.location.assign("http://localhost:8888/service");
       }
-      else {
-        alert(data.message);
+      else{
+        alert("Tài khoản hoặc mật khẩu không đúng, Vui lòng nhập lại");
       }
+
     })
   );
 }

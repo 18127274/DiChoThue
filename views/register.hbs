@@ -21,20 +21,36 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Đăng kí</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" id = "add1">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputtaikhoan"
-                                        placeholder="Tài khoản">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputhoten"
+                                    <input type="text" class="form-control form-control-user" id="name"
                                         placeholder="Họ tên">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email ">
+                                    <input type="text" class="form-control form-control-user" id="username"
+                                        placeholder="Tài khoản">
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="pass"
+                                        placeholder="Mật khẩu">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="phone" class="form-control form-control-user" id="phone"
+                                        placeholder="Số điện thoại">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="email"
+                                        placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="address"
+                                        placeholder="Địa chỉ">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="area"
+                                        placeholder="Mã khu vực">
+                                </div>
+                               {{!--  <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleInputPassword" placeholder="Mật khẩu">
@@ -43,11 +59,10 @@
                                         <input type="password" class="form-control form-control-user"
                                             id="exampleRepeatPassword" placeholder="Xác nhận lại mật khẩu">
                                     </div>
-                                </div>
+                                </div> --}}
                                 
-                                <a href="/login" class="btn btn-primary btn-user btn-block">
-                                    Đăng kí
-                                </a>
+                            
+                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Đăng ký">
                                 <hr>
                                 <a href="/registerncc" class="btn btn-primary btn-user btn-block">
                                     Đăng kí tài khoản nhà cung cấp
@@ -91,7 +106,7 @@ javascript --}}
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var id = document.getElementById('id').value;
+
         var name = document.getElementById('name').value;
         var username = document.getElementById('username').value;
         var pass = document.getElementById('pass').value;
@@ -102,7 +117,7 @@ javascript --}}
         pass = pass.slice(2);
 
        
-        Register_account_Customer(id, name, username, pass, phone, email, address, area);
+        Register_account_Customer(name, username, pass, phone, email, address, area);
     });
 </script>
 

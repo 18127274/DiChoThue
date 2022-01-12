@@ -189,10 +189,8 @@
                 {{!-- đổ dữ liệu lên table --}}
                 <script>
                     get_Products((result) => {
-
                         var birds = result;
-
-                        
+                     
                         var ele = document.getElementById('data_table_product');
                         for (var i = 0; i <= birds.length; i++) {
                             // POPULATE SELECT ELEMENT WITH JSON.
