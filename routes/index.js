@@ -120,6 +120,19 @@ router.get('/register', function (req, res, next) {
   res.render('register', {layout: 'admin'}) 
 });
 
+router.get('/login_shipper', function (req, res, next) {
+  res.render('login_shipper', {layout: 'admin'}) 
+});
+
+router.get('/registershipper', function (req, res, next) {
+  res.render('registershipper', {layout: 'admin'}) 
+});
+
+router.get('/orders', function (req, res, next) {
+  res.render('orders', {layout: 'admin'}) 
+});
+
+
 
 
 /* router.get('/test', function (req, res, next) {

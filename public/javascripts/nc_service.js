@@ -51,6 +51,23 @@ function dangnhap_khachhang(username, password) {
   );
 }
 
+function dangnhap_shipper(username, password) {
+  var array = [];
+
+  GET('http://localhost:8080/api/dangnhap_shipper/'+username+'/'+password+'').then(res =>
+    res.json().then(data => {
+      if (data.length > 0) {
+        localStorage.setItem("senddata_login", JSON.stringify(data));
+        window.location.assign("http://localhost:8888/nc_service");
+      }
+      else{
+        alert("Tài khoản hoặc mật khẩu không đúng, Vui lòng nhập lại");
+      }
+
+    })
+  );
+}
+
 
 
 function get_Products(callback) {
@@ -68,6 +85,25 @@ function get_Products(callback) {
     })
   );
 }
+
+function get_noorders(callback) {
+  var array = [];
+  GET('http://localhost:8080/api/xemdonhang1/0').then(res =>
+    res.json().then(data => {
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data});
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+}
+
+
+
 
 
 
