@@ -230,7 +230,7 @@
 </script>
 
 <script>
-	function search_service() {
+	function search_service(name) {
 		document.getElementById("allservicess").innerHTML = "";
 		var temp_service = document.getElementById('search_service').value;
 		console.log(temp_service);
@@ -239,19 +239,20 @@
 			var ele = document.getElementById('allservicess');
 			for (var i = 0; i <= birds.length; i++) {
 				// POPULATE SELECT ELEMENT WITH JSON.
-				ele.innerHTML = ele.innerHTML + "<div class=\"col-sm-5 py-3\">" +
-					"<div class=\"card h-100\">" +
-					"<img class=\"card-img-top\" src=\"/n-5.png\" height=\"200\" alt=\"...\" />" +
-					"<div class=\"card-body p-4\">" +
-					"<div class=\"text-center\">" +
-					"<h5 class=\"fw-bolder\">" + birds[i].name + "</h5>" +
-					birds[i].price +
-					"</div>" +
-					"</div>" +
-					"<div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent\">" +
-					"<div class=\"text-center\">" +
-					"<a class=\"w-50 btn btn-primary\" id=\"detai\" href=\"/detail\">Detail</a>" +
-					"</div>" +
+				ele.innerHTML = ele.innerHTML + "<div class=\"col-lg-6\">" +
+					"<div class=\"card mb-4\">" +
+					"<a href=\"#!\">" +
+					"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+					"</a>" +
+					"<div class=\"card-body\">" +
+
+					"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl + " " +
+					"<br>" +
+
+
+					"<br>" +
+					"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice(" + birds[i].id + ")\" id=\"detai\"> Chi tiết sản phẩm</a>" +
+
 					"</div>" +
 					"</div>" +
 					"</div>";

@@ -1,30 +1,4 @@
-function getServices() {
-  GET('https://backendsundara.herokuapp.com/service/get-all').then(res =>
-    res.json().then(data => {
-      var template = $('#service-table-template').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ services: data.data });
-      console.log(contextualHtml);
-      $('#services').html(contextualHtml);
-    })
-  );
-}
 
-
-function getServices_byname(name, callback) {
-  var array = [];
-  console.log(name);
-  GET('https://backendsundara.herokuapp.com/service/search?name=' + name).then(res =>
-    res.json().then(data => {
-      var template = $('#service-table1').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices1: data.data });
-      $('#allservices1').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
 
 function getService_byid(id,callback) {
   var array = [];
@@ -42,67 +16,21 @@ function getService_byid(id,callback) {
   );
 }
 
-function getemp_byname(name, callback) {
+function getServices_byname(name,callback) {
   var array = [];
-  console.log(name);
-  GET('https://backendsundara.herokuapp.com/employ/search?name=' + name).then(res =>
+  GET('http://localhost:8081/api/sanpham/timkiem?tensp=' + name).then(res =>
     res.json().then(data => {
-      var template = $('#emp-table1').html();
+      var template = $('#service-table').html();
       var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allemp1: data.data });
-      $('#allemp1').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
 
-function getproduct_byname(name, callback) {
-  var array = [];
-  console.log(name);
-  GET('https://backendsundara.herokuapp.com/product/search?name=' + name).then(res =>
-    res.json().then(data => {
-      var template = $('#product-table1').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allproduct1: data.data });
-      $('#allproduct1').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
-
-function getbranch_byname(name, callback) {
-  var array = [];
-  console.log(name);
-  GET('https://backendsundara.herokuapp.com/branch/search?name=' + name).then(res =>
-    res.json().then(data => {
-      var template = $('#branch-table1').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allbranch1: data.data });
-      $('#allbranch1').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
-
-/* function getid_khachhang(username,callback) {
-  var array = [];
-  GET('http://localhost:8081/api/khachhang' + username).then(res =>
-    res.json().then(data => {
-      var template = $('#login-table').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allcus: data });
-      $('#allcus').html(contextualHtml);
+      var contextualHtml = compiled({ allservices: data});
+      $('#allservices').html(contextualHtml);
       array = data;
+      console.log(array);
       return callback(array);
     })
   );
 }
- */
-
-
 
 
 
@@ -123,22 +51,6 @@ function dangnhap_khachhang(username, password) {
   );
 }
 
-/* function getinforcus_byid(,callback) {
-  var array = [];
-  GET('http://localhost:8081/api/khachhang').then(res =>
-    res.json().then(data => {
-    
-      var template = $('#service-table').html();
-      var compiled = Handlebars.compile(template);
-
-      var contextualHtml = compiled({ allservices: data});
-      $('#allservices').html(contextualHtml);
-      array = data;
-      console.log(array);
-      return callback(array);
-    })
-  );
-} */
 
 
 function get_Products(callback) {
@@ -157,75 +69,7 @@ function get_Products(callback) {
   );
 }
 
-function get_allcustomer(callback) {
-  var array = [];
-  GET('https://backendsundara.herokuapp.com/customer/get-all').then(res =>
-    res.json().then(data => {
-      var template = $('#customer-table').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices: data.data });
-      $('#listproduct').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
 
-
-
-function Add_service(name, price, time_treatment, description, products) {
-  POST('https://backendsundara.herokuapp.com/service/add', {
-    "name": name,
-    "price": price,
-    "time_treatment": time_treatment,
-    "description": description,
-    "products": products
-  }).then(res =>
-    res.json().then(data => {
-      if (data.code == 0) {
-        alert("Successfully Add");
-      }
-      else {
-        alert("Failed Add");
-      }
-    })
-  );
-}
-
-function Add_branch(name, phone, address) {
-  POST('https://backendsundara.herokuapp.com/branch/add', {
-    "name": name,
-    "phone": phone,
-    "address": address
-  }).then(res =>
-    res.json().then(data => {
-      if (data.code == 0) {
-        alert("Successfully Add");
-      }
-      else {
-        alert("Failed Add");
-      }
-    })
-  );
-}
-
-function Add_product(name, branch, category, quantity_remain) {
-  POST('https://backendsundara.herokuapp.com/product/add', {
-    "name": name,
-    "brand": branch,
-    "category": category,
-    "quantity_remain": quantity_remain
-  }).then(res =>
-    res.json().then(data => {
-      if (data.code == 0) {
-        alert("Successfully Add");
-      }
-      else {
-        alert("Failed Add");
-      }
-    })
-  );
-}
 
 function Add_employee(name, email, phone, primary_salary, salary_per_service) {
   POST('https://backendsundara.herokuapp.com/employ/add', {
