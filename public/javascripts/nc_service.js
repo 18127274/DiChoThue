@@ -26,6 +26,22 @@ function getServices_byname(name, callback) {
   );
 }
 
+function getService_byid(id,callback) {
+  var array = [];
+  GET('http://localhost:8081/api/sanpham/' + id).then(res =>
+    res.json().then(data => {
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data});
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+}
+
 function getemp_byname(name, callback) {
   var array = [];
   console.log(name);

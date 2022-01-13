@@ -1,92 +1,113 @@
 <!-- Intro Three -->
-	
+<script src="../javascripts/api.js"></script>
+<script type="text/javascript" src="../javascripts/booking.js"> </script>
+<script type="text/javascript" src="../javascripts/cart.js"> </script>
+<script type="text/javascript" src="../javascripts/nc_service.js"> </script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/style2.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/stylebutton.css" />
+
+
+<script type='text/x-handlebars-template' id='service-table'></script>
+<script type='text/x-handlebars-template' id='allservices'></script>
 
 
 <section id="location" class="testimonial-section bg-white py-5 h-500">
-<section class="py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0 round" src="/h-6.png" alt="..." /></div>
-            <div class="col-md-6">
-                <div class="small mb-1">SKU: BST-498</div>
-                <h1 class="display-5 fw-bolder">Shop item template</h1>
-                <div class="fs-5 mb-5">
-                    <span class="text-decoration-line-through">$45.00</span>
-                    
-                </div>
-                <p class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
-                <div class="d-flex">
-                    
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="w-45 btn btn-primary btn-lg" type="submit">
-                                <i class="bi-cart-fill me-1"></i>
-                                Add to cart
-                            </button>
-                        
-                    
-                </div>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center" id="allservices">
+
+
+
+
             </div>
         </div>
-    </div>
-</section>
+
+    </section>
 </section>
 
+{{!-- xu ly tang giam so luong san pham --}}
+<script>
+    function increaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        document.getElementById('number').value = value;
+        localStorage.setItem("data_icrdcr", value);
+        console.log(document.getElementById('number').value);
+    }
+
+    function decreaseValue() {
+        var value = parseInt(document.getElementById('number').value, 10);
+        value = isNaN(value) ? 0 : value;
+        value < 1 ? value = 1 : '';
+        value--;
+        document.getElementById('number').value = value;
+        localStorage.setItem("data_icrdcr", value);
+        console.log(value);
+    }
+</script>
+{{!-- xu ly luu danh sach san pham vao gio hang --}}
+<script>
+    var list_service = '';
+    function add_service_tocart(id) {
+        console.log(id);
+        console.log(localStorage.getItem('data_icrdcr'));
+        list_service = list_service + ',' + id;
+        localStorage.setItem("send_data", list_service);
+        localStorage.removeItem('data_icrdcr');
+        console.log("ket qua");
+        console.log(localStorage.getItem('data_icrdcr'));
+        console.log(list_service);
+        alert("Thêm thành công");
+    }
+</script>
+
+
+
+
+
+<script>
+    var id_service = localStorage.getItem("send_data");
+    console.log(id_service);
+
+    getService_byid(id_service, (result) => {
+        var birds = result;
+
+        var ele = document.getElementById('allservices');
+
+        localStorage.setItem("senddata_list_idservice", id_service);
+
+        ele.innerHTML +=
+            "<h2> con cac </h2>";
+
+        
+        document.getElementById("allservices").innerHTML = ele.innerHTML;
+        console.log(ele);
+    });
+</script>
 
 <section id="testimonial" class="testimonial-section bg-white py-5 h-1000">
-<section class="page-section cta">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-9 mx-auto">
-                        <div class="cta-inner bg-faded text-center rounded">
-                            <h2 class="section-heading mb-4">
-                                <span class="section-heading-upper">Our Promise</span>
-                                <span class="section-heading-lower">To You</span>
-                            </h2>
-                            <p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you with friendly service, a welcoming atmosphere, and above all else, excellent products made with the highest quality ingredients. If you are not satisfied, please let us know and we will do whatever we can to make things right!</p>
-                        </div>
+    <section class="page-section cta">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-9 mx-auto">
+                    <div class="cta-inner bg-faded text-center rounded">
+                        <h2 class="section-heading mb-4">
+                            <span class="section-heading-upper">Our Promise</span>
+                            <span class="section-heading-lower">To You</span>
+                        </h2>
+                        <p class="mb-0">When you walk into our shop to start your day, we are dedicated to providing you
+                            with friendly service, a welcoming atmosphere, and above all else, excellent products made
+                            with the highest quality ingredients. If you are not satisfied, please let us know and we
+                            will do whatever we can to make things right!</p>
                     </div>
                 </div>
             </div>
-</section>	
-</section> 
+        </div>
+    </section>
+</section>
 
 
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/styles2.css" />
-
-
-     <div class="row g-3">
-                        <div class="col-12">
-
-                            <label for="exampleFormControlSelect1">Branch</label>
-
-
-                            <select class="form-control" id="allbranch">
-                                <option value="">-- Select --</option>
-                            </select>
-
-                            <label for="exampleFormControlSelect1">Which Professional</label>
-                            <select class="form-control" id="allemp" onchange="validateSelectBox(this)">
-                                <option value="">-- Select --</option>
-                            </select>
-
-
-                            <label for="date" class="form-label">Choose an appointment date</label>
-                            <input type="date" class="form-control" id="date" placeholder="">
-
-                            <label for="time" class="form-label">Choose time </label>
-                            <input type="time" class="form-control" id="time" placeholder="">
-
-                            <label for="firstName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="Name" placeholder="Name" value="">
-
-                            <label for="email" class="form-label">Email <span
-                                    class="text-muted">(Optional)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="you@example.com">
-
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone" placeholder="Phone">
-
-                            <label for="phone" class="form-label"></label>
-                        </div>
-                    </div>

@@ -98,15 +98,7 @@
 				<!-- Nested row for non-featured blog posts-->
 				<div class="row" id="allservicess">
 
-
-
-
-			
-
-
-
-
-
+					
 
 				</div>
 				<!-- next page-->
@@ -147,16 +139,15 @@
 {{!-- them vao gio hang localStorage.setItem("senddata", JSON.stringify(b)); --}}
 <script>
 	var list_service = '';
-	function add_service_tocart(id) {
-		console.log(id);
-		console.log(localStorage.getItem('data_icrdcr'));
-		list_service = list_service + ',' + id;
-		localStorage.setItem("send_data", list_service);
-		localStorage.removeItem('number');
-		console.log(list_service);
-		alert("Thêm thành công");
+
+	function send_idservice(id){
+		localStorage.setItem("send_data", id);
+		window.location.assign("http://localhost:8888/detail");
+		
 	}
 </script>
+
+
 <script>
 	var arr_img;
 	for (let i = 1; i < 20; i++) {
@@ -168,7 +159,7 @@
 	get_allService((result) => {
 		var birds = result;
 		var ele = document.getElementById('allservicess');
-
+		console.log(birds.length);
 		for (var i = 0; i <= birds.length; i++) {
 
 			var list_arr_service = "";
@@ -181,22 +172,23 @@
 
 			console.log(list_arr_service);
 			// POPULATE SELECT ELEMENT WITH JSON.
-			ele.innerHTML = ele.innerHTML + "<div class=\"col-lg-5\">" +
+			ele.innerHTML = ele.innerHTML + 
+				"<div class=\"col-lg-5\">" +
 				"<div class=\"card mb-4\">" +
 				"<a href=\"#!\">" +
 				"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
 				"</a>" +
 				"<div class=\"card-body\">" +
 
-				"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl + " " + 
+				"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl + " " +
 				"<br>" +
 
-			 	"<div class=\"value-button\" id=\"decrease\" onclick=\"decreaseValue()\" value=\"Decrease Value\">"+ "-" + "</div>" + 
-				"<input type=\"number\" id=\"number\" value=\"0\"/>" + 
-				"<div class=\"value-button\" id=\"increase\" onclick=\"increaseValue()\" value=\"Increase Value\">"+  "+" + "</div>" +
+				"<div class=\"value-button\" id=\"decrease\" onclick=\"decreaseValue()\" value=\"Decrease Value\">" + "-" + "</div>" +
+				"<input type=\"number\" id=\"number\" value=\"0\"/>" +
+				"<div class=\"value-button\" id=\"increase\" onclick=\"increaseValue()\" value=\"Increase Value\">" + "+" + "</div>" +
 				"<br>" +
-
-				"<a class=\"w-55 btn btn-primary\" onclick=\"add_service_tocart(" + birds[i].id + ")\" id=\"detai\" >Thêm vào giỏ hàng </a>" +
+				"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice("+birds[i].id+")\" id=\"detai\"> Chi tiết sản phẩm</a>" +
+				
 				"</div>" +
 				"</div>" +
 				"</div>";
