@@ -3,6 +3,7 @@
 <script type="text/javascript" src="../javascripts/cart.js"> </script>
 <script type="text/javascript" src="../javascripts/nc_service.js"> </script>
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/stylebutton.css" />
 <img class="card-img" src="/Header.png" alt="..." />
 
 <!--introservice-->
@@ -15,29 +16,29 @@
             </div>
 </header>-->
 <!-- Page content-->
-<div class = "bg-white">
-        <div class="container">
-			<br>
-			<br>
-			<br>
-            <div class="row">
-				 <!-- Side widgets-->
-                <div class="col-lg-4">
-                    <!-- Search widget-->
-                    
-                    <div class="row">   
-                        <div class="card-body">
-                            <form class="form-inline my-5 my-lg-3" id="add4">
-								<input class="form-control mr-sm-3 " id="search_service" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-primary" type="submit">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</form>
-                        </div>
-                    
-                    <!-- Categories widget-->
-                    
+<div class="bg-white">
+	<div class="container">
+		<br>
+		<br>
+		<br>
+		<div class="row">
+			<!-- Side widgets-->
+			<div class="col-lg-4">
+				<!-- Search widget-->
+
+				<div class="row">
+					<div class="card-body">
+						<form class="form-inline my-5 my-lg-3" id="add4">
+							<input class="form-control mr-sm-3 " id="search_service" type="search" placeholder="Search"
+								aria-label="Search">
+							<button class="btn btn-primary" type="submit">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</form>
+					</div>
+
+					<!-- Categories widget-->
+
 					<div class="title"><strong>Category</strong></div>
 					<ul id="category-tabs">
 						<li><a href="javascript:void" class="main-category">Đồ ăn<i class="fa fa-minus"></i></a>
@@ -58,7 +59,8 @@
 						</li>
 					</ul>
 					<ul id="category-tabs">
-						<li><a href="javascript:void" class="main-category">Đồ gia dụng, vệ sinh<i class="fa fa-minus"></i></a>
+						<li><a href="javascript:void" class="main-category">Đồ gia dụng, vệ sinh<i
+									class="fa fa-minus"></i></a>
 							<ul class="sub-category-tabs">
 								<li><a href="javascript:void">Đồ gia dụng</a></li>
 								<li><a href="javascript:void">Đồ vệ sinh</a></li>
@@ -66,93 +68,73 @@
 							</ul>
 						</li>
 					</ul>
-				</div> 
-                    
-                </div>
-                <!-- Blog entries-->
-                <div class=" col-lg-8">
-                    <!-- Nested row for non-featured blog posts-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Giam 10%</div>
-                                    <h2 class="card-title h4">Ca rỏt</h2>
-                                    <p class="card-text">........................................</p>
-                                    <a class="btn btn-primary" href="/detail">Detail</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Giam 10%</div>
-                                    <h2 class="card-title h4">Ca rỏt</h2>
-                                    <p class="card-text">........................................</p>
-                                    <a class="btn btn-primary" href="/detail">Detail</a>
-                                </div>
-                            </div>
+				</div>
 
-							<div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Giam 10%</div>
-                                    <h2 class="card-title h4">Ca rỏt</h2>
-                                    <p class="card-text">........................................</p>
-                                    <a class="btn btn-primary" href="/detail">Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Giam 10%</div>
-                                    <h2 class="card-title h4">Ca rỏt</h2>
-                                    <p class="card-text">........................................</p>
-                                    <a class="btn btn-primary" href="/detail">Detail</a>
-                                </div>
-                            </div>
-                            <!-- Blog post-->
-                            <div class="card mb-4">
-                                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                                <div class="card-body">
-                                    <div class="small text-muted">Giam 10%</div>
-                                    <h2 class="card-title h4">Ca rỏt</h2>
-                                    <p class="card-text">........................................</p>
-                                    <a class="btn btn-primary" href="/detail">Detail</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- next page-->
-                    <nav aria-label="Pagination">
-                        <hr class="my-0" />
-                        <ul class="pagination justify-content-center my-4">
-                            <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a></li>
-                            <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                            <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                            <li class="page-item"><a class="page-link" href="#!">Older</a></li>
-                        </ul>
-                    </nav>
-                </div>
-               
-            </div>
-        </div>
+			</div>
+			<!-- Blog entries-->
+
+			<script>
+				function increaseValue() {
+					var value = parseInt(document.getElementById('number').value, 10);
+					value = isNaN(value) ? 0 : value;
+					value++;
+					document.getElementById('number').value = value;
+					localStorage.setItem("data_icrdcr", value);
+					console.log(document.getElementById('number').value);
+				}
+
+				function decreaseValue() {
+					var value = parseInt(document.getElementById('number').value, 10);
+					value = isNaN(value) ? 0 : value;
+					value < 1 ? value = 1 : '';
+					value--;
+					document.getElementById('number').value = value;
+					localStorage.setItem("data_icrdcr", value);
+					console.log(value);
+				}
+			</script>
+
+			<div class=" col-lg-8">
+				<!-- Nested row for non-featured blog posts-->
+				<div class="row" id="allservicess">
+
+
+
+
+			
+
+
+
+
+
+
+				</div>
+				<!-- next page-->
+				<nav aria-label="Pagination">
+					<hr class="my-0" />
+					<ul class="pagination justify-content-center my-4">
+						<li class="page-item disabled"><a class="page-link" href="#" tabindex="-1"
+								aria-disabled="true">Newer</a></li>
+						<li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
+						<li class="page-item"><a class="page-link" href="#!">2</a></li>
+						<li class="page-item"><a class="page-link" href="#!">3</a></li>
+						<li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
+						<li class="page-item"><a class="page-link" href="#!">15</a></li>
+						<li class="page-item"><a class="page-link" href="#!">Older</a></li>
+					</ul>
+				</nav>
+			</div>
+
+		</div>
+	</div>
 </div>
- 
+
 
 <script>
-	$('#category-tabs li a').click(function(){
-    $(this).next('ul').slideToggle('500');
-    $(this).find('i').toggleClass('fa-minus fa-plus ')
-});
+	$('#category-tabs li a').click(function () {
+		$(this).next('ul').slideToggle('500');
+		$(this).find('i').toggleClass('fa-minus fa-plus ')
+	});
 </script>
 
 
@@ -167,8 +149,10 @@
 	var list_service = '';
 	function add_service_tocart(id) {
 		console.log(id);
+		console.log(localStorage.getItem('data_icrdcr'));
 		list_service = list_service + ',' + id;
 		localStorage.setItem("send_data", list_service);
+		localStorage.removeItem('number');
 		console.log(list_service);
 		alert("Thêm thành công");
 	}
@@ -184,6 +168,7 @@
 	get_allService((result) => {
 		var birds = result;
 		var ele = document.getElementById('allservicess');
+
 		for (var i = 0; i <= birds.length; i++) {
 
 			var list_arr_service = "";
@@ -193,26 +178,30 @@
 				list_arr_service = list_arr_service + ',' + result[j].tenSP;
 			}
 			list_arr_service = list_arr_service.substr(1);
-			
+
 			console.log(list_arr_service);
 			// POPULATE SELECT ELEMENT WITH JSON.
-			ele.innerHTML = ele.innerHTML + "<div class=\"col-sm-4 py-3\">" +
-				"<div class=\"card h-100\">" +
-				"<img class=\"card-img-top\" src=\"/" + arr_img[i] + "\" height=\"200\" alt=\"...\" />" +
-				"<div class=\"card-body p-4\">" +
-				"<div class=\"text-center\">" +
-				"<h5 class=\"fw-bolder\">" + birds[i].tenSP + "</h5>" +
-				birds[i].giaTien + " VNĐ" + "<br>" +
+			ele.innerHTML = ele.innerHTML + "<div class=\"col-lg-5\">" +
+				"<div class=\"card mb-4\">" +
+				"<a href=\"#!\">" +
+				"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+				"</a>" +
+				"<div class=\"card-body\">" +
 
-				"</div>" +
-				"</div>" +
-				"<div class=\"card-footer p-4 pt-0 border-top-0 bg-transparent\">" +
-				"<div class=\"text-center\">" +
-				"<a class=\"w-55 btn btn-primary\" onclick= \"add_service_tocart(" + birds[i].id + ")\" id=\"detai\" >Thêm vào giỏ hàng </a>" +
-				"</div>" +
+				"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl + " " + 
+				"<br>" +
+
+			 	"<div class=\"value-button\" id=\"decrease\" onclick=\"decreaseValue()\" value=\"Decrease Value\">"+ "-" + "</div>" + 
+				"<input type=\"number\" id=\"number\" value=\"0\"/>" + 
+				"<div class=\"value-button\" id=\"increase\" onclick=\"increaseValue()\" value=\"Increase Value\">"+  "+" + "</div>" +
+				"<br>" +
+
+				"<a class=\"w-55 btn btn-primary\" onclick=\"add_service_tocart(" + birds[i].id + ")\" id=\"detai\" >Thêm vào giỏ hàng </a>" +
 				"</div>" +
 				"</div>" +
 				"</div>";
+
+
 		}
 		document.getElementById("allservicess").innerHTML = ele;
 	});
