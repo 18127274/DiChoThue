@@ -3,13 +3,11 @@
 <script type="text/javascript" src="../javascripts/booking.js"> </script>
 <script type="text/javascript" src="../javascripts/cart.js"> </script>
 <script type="text/javascript" src="../javascripts/nc_service.js"> </script>
-<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/style2.css" />
-<link rel="stylesheet" type="text/css" href="/stylesheets/stylebutton.css" />
+
 
 
 <script type='text/x-handlebars-template' id='service-table'></script>
-<script type='text/x-handlebars-template' id='allservices'></script>
+
 
 
 <section id="location" class="testimonial-section bg-white py-5 h-500">
@@ -19,47 +17,47 @@
 
 
 
-
             </div>
         </div>
 
     </section>
 </section>
 
-{{!-- xu ly tang giam so luong san pham --}}
-<script>
-    function increaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        document.getElementById('number').value = value;
-        localStorage.setItem("data_icrdcr", value);
-        console.log(document.getElementById('number').value);
-    }
 
-    function decreaseValue() {
-        var value = parseInt(document.getElementById('number').value, 10);
-        value = isNaN(value) ? 0 : value;
-        value < 1 ? value = 1 : '';
-        value--;
-        document.getElementById('number').value = value;
-        localStorage.setItem("data_icrdcr", value);
-        console.log(value);
-    }
-</script>
-{{!-- xu ly luu danh sach san pham vao gio hang --}}
+{{!-- xu ly luu danh sach san pham vao gio hang
+console.log(id);
+console.log(id_kh[0].id);
+console.log(id_kh[1].id);
+console.log(sl);
+console.log(giatien); --}}
 <script>
     var list_service = '';
     function add_service_tocart(id) {
+
+        list_service += id;
+
+        var id_kh = localStorage.getItem("senddata_login");
+        var sl = document.getElementById("inputQuantity").value;
+        var giatien = document.getElementById("input_price").innerHTML;
+
+        console.log(id_kh);
+        id_kh = JSON.parse(id_kh);
+        var slspcl = localStorage.getItem("slsp_conlai");
+        console.log(slspcl);
+
         console.log(id);
-        console.log(localStorage.getItem('data_icrdcr'));
-        list_service = list_service + ',' + id;
-        localStorage.setItem("send_data", list_service);
-        localStorage.removeItem('data_icrdcr');
-        console.log("ket qua");
-        console.log(localStorage.getItem('data_icrdcr'));
-        console.log(list_service);
-        alert("Thêm thành công");
+        console.log(id_kh[0].id);
+        console.log(sl);
+        console.log(giatien);
+
+        if (sl <= slspcl) {
+            add_product_into_cart(id, id_kh[0].id, sl, giatien);
+            alert("Thêm sản phẩm thành công");
+        }
+        else {
+            alert("Không đủ số lượng sản phẩm");
+        }
+       
     }
 </script>
 
@@ -73,17 +71,36 @@
 
     getService_byid(id_service, (result) => {
         var birds = result;
-
+        console.log(birds.giaTien);
         var ele = document.getElementById('allservices');
 
-        localStorage.setItem("senddata_list_idservice", id_service);
+        ele.innerHTML = ele.innerHTML +
+            "<div class=\"col-md-6\">" +
+            "<img class=\"card-img-top mb-5 mb-md-0 round\" src=\"\" alt=\"...\" />" +
+            "</div>" +
 
-        ele.innerHTML +=
-            "<h2> con cac </h2>";
+            "<div class=\"col-md-6\">" +
 
-        
+            "<h1 class=\"display-5 fw-bolder\">" + birds.tenSP + "</h1>" +
+            "<div class=\"fs-5 mb-5\">" +
+            "<div id =\"input_price\">" + birds.giaTien + "</div>" +
+            "<div id =\"input_sl\">" + birds.sl + "</div>" +
+            "</div>" +
+
+            "<div class=\"d-flex\">" +
+            "<input class=\"form-control text-center me-3\" id=\"inputQuantity\" type=\"num\" style=\"max-width: 3rem\" />" +
+
+            "<button class=\"w-45 btn btn-primary btn-lg\" type=\"submit\">" +
+
+            "<a class=\"bi-cart-fill me-1\" onclick=\"add_service_tocart(" + birds.id + ")\" id=\"detai\" >Thêm vào giỏ hàng </a>" +
+            "</button>" +
+            "</div>" +
+            "</div>";
+
         document.getElementById("allservices").innerHTML = ele.innerHTML;
-        console.log(ele);
+
+        var soluongsanpham = document.getElementById("input_sl").innerHTML;
+        localStorage.setItem("slsp_conlai", soluongsanpham);
     });
 </script>
 

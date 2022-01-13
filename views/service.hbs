@@ -43,9 +43,9 @@
 					<ul id="category-tabs">
 						<li><a href="javascript:void" class="main-category">Đồ ăn<i class="fa fa-minus"></i></a>
 							<ul class="sub-category-tabs">
-								<li><a href="javascript:void">Thịt</a></li>
-								<li><a href="javascript:void">Cá</a></li>
-								<li><a href="javascript:void">Rau củ</a></li>
+								<li><a href="javascript:void" onclick="list_service_bycategory(1)">Thịt</a></li>
+								<li><a href="javascript:void" onclick="list_service_bycategory(2)">Cá</a></li>
+								<li><a href="javascript:void" onclick="list_service_bycategory(3)">Rau củ</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -73,32 +73,13 @@
 			</div>
 			<!-- Blog entries-->
 
-			<script>
-				function increaseValue() {
-					var value = parseInt(document.getElementById('number').value, 10);
-					value = isNaN(value) ? 0 : value;
-					value++;
-					document.getElementById('number').value = value;
-					localStorage.setItem("data_icrdcr", value);
-					console.log(document.getElementById('number').value);
-				}
 
-				function decreaseValue() {
-					var value = parseInt(document.getElementById('number').value, 10);
-					value = isNaN(value) ? 0 : value;
-					value < 1 ? value = 1 : '';
-					value--;
-					document.getElementById('number').value = value;
-					localStorage.setItem("data_icrdcr", value);
-					console.log(value);
-				}
-			</script>
 
 			<div class=" col-lg-8">
 				<!-- Nested row for non-featured blog posts-->
 				<div class="row" id="allservicess">
 
-					
+
 
 				</div>
 				<!-- next page-->
@@ -127,6 +108,7 @@
 		$(this).next('ul').slideToggle('500');
 		$(this).find('i').toggleClass('fa-minus fa-plus ')
 	});
+
 </script>
 
 
@@ -134,19 +116,69 @@
 
 <script type='text/x-handlebars-template' id='service-table'></script>
 <script type='text/x-handlebars-template' id='service-table1'></script>
+<script type='text/x-handlebars-template' id='allservices'></script>
+
 
 <div id="all-r"></div>
 {{!-- them vao gio hang localStorage.setItem("senddata", JSON.stringify(b)); --}}
 <script>
 	var list_service = '';
 
-	function send_idservice(id){
+	function send_idservice(id) {
 		localStorage.setItem("send_data", id);
 		window.location.assign("http://localhost:8888/detail");
-		
+
 	}
 </script>
 
+
+{{!-- function hien thi danh sach san pham theo loai san pham --}}
+
+<script>
+	function list_service_bycategory(id) {
+
+		document.getElementById("allservicess").innerHTML = "";
+		console.log(id);
+		for (let i = 1; i < 20; i++) {
+			arr_img = arr_img + ',' + 's' + i + '.png';
+		}
+		arr_img = arr_img.split(',');
+		arr_img.shift();
+
+		getlistservice_byidcategory(id, (result) => {
+			var birds = result;
+			var ele = document.getElementById('allservicess');
+			console.log(birds.length);
+			for (var i = 0; i < birds.length; i++) {
+
+				var list_arr_service = "";
+
+				ele.innerHTML = ele.innerHTML +
+					"<div class=\"col-lg-6\">" +
+					"<div class=\"card mb-4\">" +
+					"<a href=\"#!\">" +
+					"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+					"</a>" +
+					"<div class=\"card-body\">" +
+
+					"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl +
+					"<br>" +
+
+					"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice(" + birds[i].id + ")\" id=\"detai\"> Chi tiết sản phẩm</a>" +
+
+					"</div>" +
+					"</div>" +
+					"</div>";
+			}
+			document.getElementById("allservicess").innerHTML = ele.innerHTML;
+			console.log(ele);
+		});
+
+
+
+	}
+
+</script>
 
 <script>
 	var arr_img;
@@ -172,8 +204,8 @@
 
 			console.log(list_arr_service);
 			// POPULATE SELECT ELEMENT WITH JSON.
-			ele.innerHTML = ele.innerHTML + 
-				"<div class=\"col-lg-5\">" +
+			ele.innerHTML = ele.innerHTML +
+				"<div class=\"col-lg-6\">" +
 				"<div class=\"card mb-4\">" +
 				"<a href=\"#!\">" +
 				"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
@@ -183,12 +215,10 @@
 				"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl + " " +
 				"<br>" +
 
-				"<div class=\"value-button\" id=\"decrease\" onclick=\"decreaseValue()\" value=\"Decrease Value\">" + "-" + "</div>" +
-				"<input type=\"number\" id=\"number\" value=\"0\"/>" +
-				"<div class=\"value-button\" id=\"increase\" onclick=\"increaseValue()\" value=\"Increase Value\">" + "+" + "</div>" +
+
 				"<br>" +
-				"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice("+birds[i].id+")\" id=\"detai\"> Chi tiết sản phẩm</a>" +
-				
+				"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice(" + birds[i].id + ")\" id=\"detai\"> Chi tiết sản phẩm</a>" +
+
 				"</div>" +
 				"</div>" +
 				"</div>";
@@ -241,24 +271,6 @@
 	});
 
 </script>
-<!--
-<section id="testimonial" class="testimonial-section bg-white py-5 h-1000">
-	<section class="page-section cta">
-		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 mx-auto">
-					<div class="cta-inner bg-faded text-center rounded">
-						<h2 class="section-heading mb-4">
-							<span class="section-heading-upper">Our Promise</span>
-							<span class="section-heading-lower">To You</span>
-						</h2>
-						<p class="mb-0">GHI THÔNG TIN LIÊN LẠC Ở ĐÂY</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-</section>-->
 
 
 

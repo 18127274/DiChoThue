@@ -50,11 +50,12 @@
                             <thead>
                                 <tr>
                                     <th hidden>ID</th>
-                                    <th> </th>
+        
                                   
-                                    <th>Name service</th>
-                                    <th>Price</th>
-                                    <th>Action</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá tiền</th>
+                                     <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
 
                                 </tr>
                             </thead>
@@ -79,64 +80,25 @@
                 </form>
 
 
-                <script language="javascript">
-
-                    function validateSelectBox(obj) {
-
-                        var options = obj.children;
-                        var html = '';
-                        for (var i = 0; i < options.length; i++) {
-                            if (options[i].selected) {
-                                html += options[i].value;
-                            }
-                        }
-
-                    }
-                </script>
+     
 
                 <script>
 
                     /*add service từ trang booking*/
-                    const myArrayFromLocalStorage = localStorage.getItem('senddata')
-                    const id_service_arr = JSON.parse(myArrayFromLocalStorage)
+
+                    
+                    var myArrayFromLocalStorage = localStorage.getItem('send_data')
+                    console.log(myArrayFromLocalStorage);
+                    myArrayFromLocalStorage = myArrayFromLocalStorage.substr(1);
+                  
+                    myArrayFromLocalStorage = myArrayFromLocalStorage.split(',');
+                    const id_service_arr = JSON.stringify(myArrayFromLocalStorage)
                     console.log(id_service_arr);
-                    /*add service từ trang service*/
-                    var service_from_sv = localStorage.getItem("send_data");
-                    console.log(service_from_sv);
-                    var arr_service;
-                    if (service_from_sv != null && id_service_arr != null) {
-                        console.log(service_from_sv);
-                        service_from_sv = service_from_sv.substr(1);
-                        service_from_sv = service_from_sv.split(',');
-                        /*nối 2 mảng chứa service vào với nhau*/
-                        arr_service = id_service_arr.concat(service_from_sv);
-                    }
-                    else if (service_from_sv == null && id_service_arr != null) {
-                        arr_service = id_service_arr;
-                    }
-                    else if (id_service_arr == null) {
-                        service_from_sv = service_from_sv.substr(1);
-                        service_from_sv = service_from_sv.split(',');
-                        arr_service = service_from_sv;
-                    }
-                    else {
-                        console.log("Please add service to cart");
-                    }
-
-
-                    /*function xóa những id_service bị trùng*/
-                    function unique(arr) {
-                        return Array.from(new Set(arr)) //
-                    }
-
-                    var arr_id_service = unique(arr_service);
-                    console.log(arr_id_service);
-
-                    localStorage.setItem("send_arr_service", JSON.stringify(arr_id_service));
-
+  
+                    
+                    localStorage.setItem("send_arr_service", id_service_arr);
                     function Update_cart() {
-                        console.log("dung goi tao");
-                        console.log(arr_id_service);
+                        
 
                         const myArrayFromLocalStoragee = localStorage.getItem('send_arr_service')
                         const id_service_arrr = JSON.parse(myArrayFromLocalStoragee)
@@ -149,7 +111,7 @@
                         var total_price = 0;
 
                         var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                        var html1 = "<input type=\"checkbox\">";
+
 
                         var ele = document.getElementById('data_cart');
 
@@ -163,16 +125,17 @@
                                         ele.innerHTML = ele.innerHTML + "<tr>" + 
                                             "<td hidden>" + result[j].id + "</td>" + 
                                       
-                                            "<td>" + html1 + "</td>" +                                                                                                                               
+                                                                                                                                                   
                                             "<td>" + result[j].tenSP + "</td>" +
                                             "<td>" + result[j].giaTien + "</td>" +
+                                            
                                             "<td>" + html + "</td></tr>";
                                     }
                                 }
                             }
 
                             ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + "Total price" + "</td>" +
+                                "<td>" + "Tổng hóa đơn" + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + total_price + "</td></tr>";
@@ -192,7 +155,7 @@
                 <script type='text/x-handlebars-template' id='service-table'></script>
                 <script type='text/x-handlebars-template' id='booking-table'></script>
 
-                <script type='text/x-handlebars-template' id='branch-table'></script>
+          
                 {{!-- function delete row --}}
                 <script>
 
@@ -233,22 +196,7 @@
                     }
                 </script>
 
-                <script>
-                    get_allemployee((result) => {
-                        var birds = result;
-                        var ele = document.getElementById('allemp');
-                        for (var i = 0; i <= birds.length; i++) {
-                            // POPULATE SELECT ELEMENT WITH JSON.
-                            ele.innerHTML = ele.innerHTML +
-                                '<option value="' + birds[i].id + '">' + birds[i].name + '</option>';
-                        }
-                    });
-
-                    get_id_branch();
-
-                    /*--------------*/
-
-                </script>
+        
 
                 <script>
                     var form = document.getElementById('add1');
@@ -261,14 +209,14 @@
 
                         var total_price1 = localStorage.getItem("total_price_local");
                         var id_emp = document.getElementById('allemp').value;
-                        var id_branch = document.getElementById('allbranch').value;
+                     
                         var date = formatDate(document.getElementById('date').value);
                         var time = document.getElementById('time').value;
                         var Name = document.getElementById('Name').value;
                         var email = document.getElementById('email').value;
                         var phone = document.getElementById('phone').value;
                         console.log(id_service_arr2);
-                        console.log(id_branch);
+                   
                         console.log(id_emp);
                         console.log(date);
                         console.log(time);
@@ -276,7 +224,7 @@
                         console.log(email);
                         console.log(total_price1);
                         console.log(phone);
-                        add_booking(date, time, id_branch, Name, phone, email, total_price1, id_emp, id_service_arr2);
+                        add_booking(date, time, Name, phone, email, total_price1, id_emp, id_service_arr2);
 
 
                     });

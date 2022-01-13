@@ -31,10 +31,46 @@ function Register_account_Customer(name, username, pass, phone, email, address, 
   }).then(res =>
       res.json().then(data => {
           console.log(data);
-
+          
       })
   );
 }
+
+function add_product_into_cart(masanpham, makhachhang, giatien, soluong) {
+  POST('http://localhost:8080/api/themgiohang', {
+      "maSP": masanpham,
+      "maKH": makhachhang,
+      "giaTien": giatien,
+      "sl": soluong
+  }).then(res =>
+      res.json().then(data => {
+          console.log(data);
+        
+          
+      })
+  );
+}
+
+
+function getlistservice_byidcategory(id, callback) {
+  var array = [];
+  console.log(id);
+  GET('http://localhost:8081/api/sanpham/filter/' + id).then(res =>
+    res.json().then(data => {
+    
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data});
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+}
+
+
 
 
 
