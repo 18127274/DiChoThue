@@ -44,17 +44,17 @@
                         <span class="badge bg-primary rounded-pill"></span>
                     </h4>
                     <ul class="list-group mb-3">
-                        <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="myTable" width="1000%" height="1000%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th hidden>ID</th>
-        
-                                  
+
+
                                     <th>Tên sản phẩm</th>
                                     <th>Giá tiền</th>
-                                     <th>Số lượng</th>
+                                    <th>Số lượng</th>
                                     <th>Tổng tiền</th>
-
+                                    <th>Xóa đơn hàng</th>
                                 </tr>
                             </thead>
 
@@ -78,70 +78,48 @@
                 </form>
 
 
-     
+
 
                 <script>
 
-                    /*add service từ trang booking*/
-
-                    
-                    var myArrayFromLocalStorage = localStorage.getItem('send_data')
-                    console.log(myArrayFromLocalStorage);
-                    myArrayFromLocalStorage = myArrayFromLocalStorage.substr(1);
-                  
-                    myArrayFromLocalStorage = myArrayFromLocalStorage.split(',');
-                    const id_service_arr = JSON.stringify(myArrayFromLocalStorage)
-                    console.log(id_service_arr);
-  
-                    
-                    localStorage.setItem("send_arr_service", id_service_arr);
                     function Update_cart() {
-                        
 
-                        const myArrayFromLocalStoragee = localStorage.getItem('send_arr_service')
-                        const id_service_arrr = JSON.parse(myArrayFromLocalStoragee)
-                        console.log(id_service_arrr);
-
-                        /*var id_service = localStorage.getItem("senddata");
-                        var id_service_arr = id_service;
-                        console.log(id_service_arr);
-                        console.log(id_service);*/
-                        var total_price = 0;
-
-                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-
+                        var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
 
                         var ele = document.getElementById('data_cart');
 
-                        get_allService((result) => {
-                            /*id_service_arr = id_service_arr.split(',');*/
-                            for (let i = 0; i < id_service_arrr.length; i++) {
-                                for (let j = 0; j < result.length; j++) {
-                                    if (id_service_arrr[i] == result[j].id) {
-                                        total_price += result[j].giaTien;
+                        var id_kh = localStorage.getItem("senddata_login");
+                        id_kh = JSON.parse(id_kh);
 
-                                        ele.innerHTML = ele.innerHTML + "<tr>" + 
-                                            "<td hidden>" + result[j].id + "</td>" + 
-                                      
-                                                                                                                                                   
-                                            "<td>" + result[j].tenSP + "</td>" +
-                                            "<td>" + result[j].giaTien + "</td>" +
-                                            
-                                            "<td>" + html + "</td></tr>";
-                                    }
-                                }
+
+                        view_cartof_customer(id_kh[0].id, (result) => {
+                            /*id_service_arr = id_service_arr.split(',');*/
+
+
+                            for (let i = 0; i < result.dsgioHang.length; i++) {
+
+                                var giatien = result.dsgioHang[i].tongChiTiet / result.dsgioHang[i].chitietgh.sl;
+
+
+                                ele.innerHTML = ele.innerHTML + "<tr>" +
+                                    "<td hidden>" + result.dsgioHang[i].chitietgh.id + "</td>" +
+                                    "<td>" + result.dsgioHang[i].tenSP + "</td>" +
+                                    "<td>" + giatien + "</td>" +
+                                    "<td>" + result.dsgioHang[i].chitietgh.sl + "</td>" +
+                                    "<td>" + result.dsgioHang[i].tongChiTiet + "</td>" +
+                                    "<td>" + html + "</td></tr>";
+
+
                             }
 
                             ele.innerHTML = ele.innerHTML + "<tr>" +
                                 "<td>" + "Tổng hóa đơn" + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + " " + "</td>" +
-                                "<td>" + total_price + "</td></tr>";
+                                "<td>" + result.giohang.tongTien + "</td>" +
+                                "</tr>";
 
-                            console.log(ele);
-                            /*document.getElementById("list_service").innerHTML = ele;*/
-                            localStorage.setItem("total_price_local", total_price);
-                            console.log(total_price);
+
                         })
                         /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
 
@@ -153,48 +131,38 @@
                 <script type='text/x-handlebars-template' id='service-table'></script>
                 <script type='text/x-handlebars-template' id='booking-table'></script>
 
-          
+
                 {{!-- function delete row --}}
                 <script>
 
                     /*var id_service = localStorage.getItem("senddata");*/
-
-                    var myArrayFromLocalStorage1 = localStorage.getItem('send_arr_service')
-                    var id_service_arr1 = JSON.parse(myArrayFromLocalStorage1)
-
-                    console.log(id_service_arr1);
-
-
                     function deleteRow(r) {
-                        var i = r.parentNode.parentNode.rowIndex;
-                        var j = document.getElementsByTagName("tr")[i];
-                        var index = j.childNodes[0].innerHTML;
-                        console.log(index);
-                        document.getElementById("myTable").deleteRow(i);
-                        console.log(id_service_arr1);
 
-                        for (let i = 0; i < id_service_arr1.length; i++) {
-                            console.log('day nay');
-                            console.log(id_service_arr1[i]);
-                            console.log('day nay1');
+                        var c = confirm("Are you sure delete?");
+                        if (c == true) {
+                            var i = r.parentNode.parentNode.rowIndex;
+                            var j = document.getElementsByTagName("tr")[i];
+                            var index = j.childNodes[0].innerHTML;
+
                             console.log(index);
-                            if (id_service_arr1[i] == index) {
-                                id_service_arr1.splice(i, 1);
-                            }
+                            console.log(i);
+                            document.getElementById("myTable").deleteRow(i);
+
+                            delete_service_ofcart(index);
+
+                        } else {
 
                         }
-                        localStorage.setItem("send_arr_service", JSON.stringify(id_service_arr1));
-                        console.log(id_service_arr1);
-                        console.log('truoc dong clear');
                         var myobj = document.getElementById("data_cart").innerHTML = "";
-
                         var myobj = document.getElementById("data_cart");
                         console.log(myobj);
+                        document.getElementById("data_cart").innerHTML = "";
+
                         Update_cart();
                     }
                 </script>
 
-        
+
 
                 <script>
                     var form = document.getElementById('add1');
@@ -207,14 +175,14 @@
 
                         var total_price1 = localStorage.getItem("total_price_local");
                         var id_emp = document.getElementById('allemp').value;
-                     
+
                         var date = formatDate(document.getElementById('date').value);
                         var time = document.getElementById('time').value;
                         var Name = document.getElementById('Name').value;
                         var email = document.getElementById('email').value;
                         var phone = document.getElementById('phone').value;
                         console.log(id_service_arr2);
-                   
+
                         console.log(id_emp);
                         console.log(date);
                         console.log(time);

@@ -19,6 +19,25 @@ function get_allService(callback) {
   );
 }
 
+function view_cartof_customer(id_cus,callback) {
+  var array = [];
+  GET('http://localhost:8080/api/xemgiohang/' + id_cus).then(res =>
+    res.json().then(data => {
+
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data });
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+}
+
+
+
 function Register_account_Customer(name, username, pass, phone, email, address, area) {
   POST('http://localhost:8081/api/khachhang', {
     "Hoten": name,
@@ -67,20 +86,44 @@ function Register_account_Shipper(name, username, pass, phone, email, address, s
   );
 }
 
-function add_product_into_cart(masanpham, makhachhang, giatien, soluong) {
+function add_product_into_cart(masanpham, makhachhang, soluong) {
   POST('http://localhost:8080/api/themgiohang', {
     "maSP": masanpham,
     "maKH": makhachhang,
-    "giaTien": giatien,
     "sl": soluong
+
   }).then(res =>
     res.json().then(data => {
       console.log(data);
+      if (data != "") {
+        alert("Thêm sản phẩm thành công");
+        console.log(data.lenght);
 
-
+      }
+      else {
+        alert("Không đủ số lượng sản phẩm");
+      }
     })
   );
 }
+
+function delete_service_ofcart(idchitiet) {
+  DELETE('http://localhost:8080/api/deletegiohang/' + idchitiet).then(res =>
+    res.json().then(data => {
+      console.log(data);
+      if (data != "") {
+        alert("Xoá sản phẩm thành công");
+      }
+      else {
+       
+      }
+    })
+  );
+}
+
+
+
+
 
 
 function getlistservice_byidcategory(id, callback) {
@@ -102,13 +145,13 @@ function getlistservice_byidcategory(id, callback) {
 }
 
 function Receive_order(mashp, madonhang) {
- /*  PUT('http://localhost:8080/api/tiepnhandonhang/', {
-    "MaShipper_input": mashp,
-    "MaDH_input": madonhang
-  }).then(res => */
-    var a = 'http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang;
-    console.log(a);
-    PUT('http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang).then(res =>
+  /*  PUT('http://localhost:8080/api/tiepnhandonhang/', {
+     "MaShipper_input": mashp,
+     "MaDH_input": madonhang
+   }).then(res => */
+  var a = 'http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang;
+  console.log(a);
+  PUT('http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang).then(res =>
     res.json().then(data => {
       console.log(data);
       if (data != "") {

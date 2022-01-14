@@ -38,7 +38,7 @@ console.log(giatien); --}}
 
         var id_kh = localStorage.getItem("senddata_login");
         var sl = document.getElementById("inputQuantity").value;
-        var giatien = document.getElementById("input_price").innerHTML;
+      
 
         console.log(id_kh);
         id_kh = JSON.parse(id_kh);
@@ -48,15 +48,10 @@ console.log(giatien); --}}
         console.log(id);
         console.log(id_kh[0].id);
         console.log(sl);
-        console.log(giatien);
 
-        if (sl <= slspcl) {
-            add_product_into_cart(id, id_kh[0].id, sl, giatien);
-            alert("Thêm sản phẩm thành công");
-        }
-        else {
-            alert("Không đủ số lượng sản phẩm");
-        }
+
+         add_product_into_cart(id, id_kh[0].id, sl);
+       
        
     }
 </script>

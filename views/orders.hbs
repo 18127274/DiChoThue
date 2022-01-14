@@ -162,6 +162,7 @@
             <!-- delete row -->
             <script>
                 function deleteRow(r) {
+                    window.location='http://www.google.com'
                     var i = r.parentNode.parentNode.rowIndex;
                     var j = document.getElementsByTagName("tr")[i];
                     var index = j.childNodes[0].innerHTML;
@@ -207,6 +208,9 @@
                     getServices_byname(temp_service, (result) => {
                         var birds = result;
                         var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
+                           <select class="form-control" id="allcategory">
+                                <option value="">Choose category</option>
+                            </select>
                         var ele = document.getElementById('data_table_service');
                         for (var i = 0; i <= birds.length; i++) {
                             // POPULATE SELECT ELEMENT WITH JSON.
@@ -249,16 +253,23 @@
                     for (var i = 0; i < birds.length; i++) {
 
                         // POPULATE SELECT ELEMENT WITH JSON.
-                        ele.innerHTML = ele.innerHTML + "<tr>" +
+                        ele.innerHTML = ele.innerHTML +   
+                            
+                            "<tr>" +
+                           
                             "<td>" + birds[i].phiShip + "</td>" +
+                           
                             "<td>" + birds[i].tongTien + "</td>" +
                             "<td>" + birds[i].tinhTrangDonHang + "</td>" +
                             "<td>" + birds[i].ngayLapDon + "</td>" +
-                            "<td>" + html + "</td></tr>";
+                            "<td>" + html + "</td>" +
+                         
+                            "</tr>";
+                          
                     }
-                    console.log(ele);
+             
                     document.getElementById("data_table_service").innerHTML = ele.innerHTML;
-                    console.log(ele);
+      
                 });
             </script>
 
