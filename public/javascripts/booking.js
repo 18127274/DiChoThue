@@ -101,6 +101,31 @@ function getlistservice_byidcategory(id, callback) {
   );
 }
 
+function Receive_order(mashp, madonhang) {
+ /*  PUT('http://localhost:8080/api/tiepnhandonhang/', {
+    "MaShipper_input": mashp,
+    "MaDH_input": madonhang
+  }).then(res => */
+    var a = 'http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang;
+    console.log(a);
+    PUT('http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang).then(res =>
+    res.json().then(data => {
+      console.log(data);
+      if (data != "") {
+        alert("Nhận đơn thành công");
+        console.log(data.lenght);
+
+      }
+      else {
+        alert("Không thể nhận đơn hàng này");
+      }
+
+
+    })
+  );
+}
+
+
 
 
 

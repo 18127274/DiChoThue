@@ -228,7 +228,8 @@
                     get_allService((result) => {
                         var birds = result;
                         var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                        var ele = document.getElementById('data_table_service');                     
+                        var ele = document.getElementById('data_table_service');    
+                        console.log(ele);               
                         console.log(birds);
                         console.log(birds.length);
                         console.log(birds[0].tenSP);  
@@ -241,7 +242,7 @@
                                 "<td>" + html + "</td></tr>";
                         }
                         
-
+                        console.log(ele);
                         document.getElementById("data_table_service").innerHTML = ele.innerHTML;
                     });
                 </script>

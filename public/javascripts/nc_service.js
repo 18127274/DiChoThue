@@ -39,7 +39,7 @@ function dangnhap_khachhang(username, password) {
 
   GET('http://localhost:8080/api/dangnhap_khachhang/'+username+'/'+password+'').then(res =>
     res.json().then(data => {
-      if (data.length > 0) {
+      if (data != "") {
         localStorage.setItem("senddata_login", JSON.stringify(data));
         window.location.assign("http://localhost:8888/service");
       }
@@ -56,9 +56,10 @@ function dangnhap_shipper(username, password) {
 
   GET('http://localhost:8080/api/dangnhap_shipper/'+username+'/'+password+'').then(res =>
     res.json().then(data => {
-      if (data.length > 0) {
-        localStorage.setItem("senddata_login", JSON.stringify(data));
-        window.location.assign("http://localhost:8888/nc_service");
+      if (data != "") {
+        console.log(data);
+        localStorage.setItem("senddata_login_shipper", JSON.stringify(data));
+        window.location.assign("http://localhost:8888/shp_list_orders");
       }
       else{
         alert("Tài khoản hoặc mật khẩu không đúng, Vui lòng nhập lại");
@@ -88,9 +89,9 @@ function get_Products(callback) {
 
 function get_noorders(callback) {
   var array = [];
-  GET('http://localhost:8080/api/xemdonhang1/0').then(res =>
+  GET('http://localhost:8080/api/donchuanhan').then(res =>
     res.json().then(data => {
-      var template = $('#service-table').html();
+      var template = $('#service-table3').html();
       var compiled = Handlebars.compile(template);
 
       var contextualHtml = compiled({ allservices: data});
