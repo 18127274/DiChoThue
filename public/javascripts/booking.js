@@ -115,7 +115,7 @@ function delete_service_ofcart(idchitiet) {
         alert("Xoá sản phẩm thành công");
       }
       else {
-       
+        alert("Xóa thất bại");
       }
     })
   );

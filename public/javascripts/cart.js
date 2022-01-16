@@ -65,36 +65,27 @@ function add_branch(name, phone, address) {
         "address": address,
     }).then(res =>
         res.json().then(data => {
-           console.log(data.code);
-           if(data.code == 0){
-               alert("thanh cong");
-           }
+            console.log(data.code);
+            if (data.code == 0) {
+                alert("thanh cong");
+            }
         })
     );
 }
 
 
-function add_booking(date, time, id_branch, name_customer, phone_customer, email_customer, total_price, id_employ, services) {
-    POST('https://backendsundara.herokuapp.com/booking/add', {
-        "date": date,
-        "time": time,
-        "id_branch": id_branch,
-        "name_customer": name_customer,
-        "phone_customer": phone_customer,
-        "email_customer": email_customer,
-        "total_price": total_price,
-        "id_employ": id_employ,
-        "services": services
+function add_booking(magh, phiship) {
+    POST('http://localhost:8080/api/themdonhang', {
+        "maGH": magh,
+        "phiShip": phiship
     }).then(res =>
         res.json().then(data => {
-            console.log("cac");
-            if (data.code == 0) {
-                window.localStorage.clear(); //clear all localstorage
-                window.location.assign(data.url);
-                console.log("cac");
+            console.log(data.code);
+            if (data != "") {
+                alert("Đặt hàng thành công");
             }
             else {
-                alert(data.message);
+                alert("Đặt hàng thất bại");
             }
         })
     );

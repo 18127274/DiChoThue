@@ -59,7 +59,7 @@
                     <div class="nav">
 
                         <div class="sb-sidenav-menu-heading">Supplier Management</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        <a class="nav-link collapsed" href="http://localhost:8888/orders" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Orders
@@ -114,8 +114,14 @@
                 <div class="mt-4 mb-4">
                     <form class="d-none d-sm-inline-block form-inline  navbar-search" id="add5">
                         <div class="input-group">
-                            <input id="search_service" type="search" class="form-control bg-light border-0 small"
-                                placeholder="Search for...">
+                            {{!-- chon don hang theo tinh trang don hang --}}
+                            <select class="form-control" id="allcategory">
+
+
+                            </select>
+
+                            {{!-- <input id="search_service" type="search" class="form-control bg-light border-0 small"
+                                placeholder="Search for..."> --}}
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
@@ -135,11 +141,13 @@
                             <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th hidden>ID</th>
                                         <th>Phí ship</th>
                                         <th>Tổng tiền</th>
                                         <th>Tình trạng đơn hàng</th>
                                         <th>Ngày lập đơn</th>
-                                        <th>Hành động</th>
+                                        <th>Cập nhật</th>
+                                       
                                     </tr>
                                 </thead>
 
@@ -158,23 +166,95 @@
 
 
 
-
-            <!-- delete row -->
             <script>
+                /*ham huy giao 1 don hang*/
                 function deleteRow(r) {
-                    window.location='http://www.google.com'
+
                     var i = r.parentNode.parentNode.rowIndex;
                     var j = document.getElementsByTagName("tr")[i];
                     var index = j.childNodes[0].innerHTML;
                     /*hoi lai xem co xoa hay khong*/
-                    var r = confirm("Are you sure delete?");
+                    var r = confirm("Bạn có chắc muốn hủy giao đơn hàng này?");
                     if (r == true) {
                         Delete_service(index);
                         document.getElementById("myTable").deleteRow(i);
-                        console.log("Successfully deleted");
+                        console.log("Hủy thành công");
 
                     } else {
 
+                    }
+
+                }
+
+                /* function Update_status(order_id, status) {
+                    console.log(order_id);
+                    console.log(status);
+                    console.log("dit con me m")
+                    var r = confirm("Bạn có chắc muốn cập nhật tình trạng đơn hàng này?");
+                    if (r == true) {
+                        if (status == "Đã tiếp nhận") {
+                            update_status_order(order_id, "Đã lấy hàng");
+                        }
+                        else if (status == "Đã lấy hàng") {
+                            update_status_order(order_id, "Đang giao");
+                        }
+                        else if (status == "Đang giao") {
+                            update_status_order(order_id, "Đã giao");
+                        }
+                        else if (status == "Đã giao") {
+                            alert("không thể cập nhật");
+                        }
+                    } else {
+
+                    }
+
+                }*/
+
+                /*ham cap nhat tinh trang don hang*/
+                function Update_status(r) {
+                    var a = confirm("Bạn có chắc muốn cập nhật tình trạng đơn hàng này?");
+                    var i = r.parentNode.parentNode.rowIndex;
+                    var j = document.getElementsByTagName("tr")[i];
+
+             
+                    var madh = j.childNodes[0].innerHTML;
+                    var tinhtrang = j.childNodes[3].innerHTML;
+
+                    console.log(madh);
+                    console.log(tinhtrang);
+
+
+
+                    if (a == true) {
+                        if (tinhtrang == "Đã tiếp nhận") {
+
+                            var temp_service1 = document.getElementById('allcategory').value;
+                            console.log(temp_service1);
+                            document.getElementById("data_table_service").innerHTML = "";
+                            update_status_order(madh, "Đã lấy hàng");
+
+                           
+                            get_orders_ofshipper_bystatus(temp_service1);
+                        }
+                        else if (tinhtrang == "Đã lấy hàng") {
+                            document.getElementById("data_table_service").innerHTML = "";
+                            update_status_order(madh, "Đang giao");
+
+                            search_order_bystatus();
+                            get_orders_ofshipper_bystatus(temp_service1);
+                        }
+                        else if (tinhtrang == "Đang giao") {
+                            document.getElementById("data_table_service").innerHTML = "";
+                            update_status_order(madh, "Đã giao");
+
+                            var temp_service1 = document.getElementById('allcategory').value;
+                            console.log(temp_service1);
+                            get_orders_ofshipper_bystatus(temp_service1);
+                        }
+                        else if (tinhtrang == "Đã giao") {
+
+                            alert("không thể cập nhật");
+                        }
                     }
 
                 }
@@ -186,46 +266,34 @@
 
             <div></div>
 
-            <!--search
-                <form class="form-inline my-2 my-lg-2" id="add5">
-                    <input class="form-control mr-sm-2" id="search_service" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </form>
-                -->
-
-
 
 
             {{!-- search service --}}
             <script>
-                function search_service() {
-                    document.getElementById("data_table_service").innerHTML = "";
-                    var temp_service = document.getElementById('search_service').value;
-                    console.log(temp_service);
-                    getServices_byname(temp_service, (result) => {
-                        var birds = result;
-                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                           <select class="form-control" id="allcategory">
-                                <option value="">Choose category</option>
-                            </select>
-                        var ele = document.getElementById('data_table_service');
-                        for (var i = 0; i <= birds.length; i++) {
-                            // POPULATE SELECT ELEMENT WITH JSON.
-                            ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + birds[i].MaDH + "</td>" +
-                                "<td>" + birds[i].Mashipper + "</td>" +
-                                "<td>" + birds[i].phiship + "</td>" +
-                                "<td>" + birds[i].tongtien + "</td>" +
-                                "<td>" + birds[i].tinhtrangthanhtoan + "</td>" +
-                                "<td>" + birds[i].ngaylapdon + "</td>" +
+                /*inner status of order into option select*/
+                var ele = document.getElementById('allcategory');
 
-                                "<td>" + html + "</td></tr>";
-                        }
-                        document.getElementById("data_table_service").innerHTML = ele;
-                    });
+                for (var i = 0; i < 1; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    ele.innerHTML = ele.innerHTML +
+                        '<option value="' + "Đã tiếp nhận" + '">' + "Đã tiếp nhận" + '</option>' +
+                        '<option value="' + "Đã lấy hàng" + '">' + "Đã lấy hàng" + '</option>' +
+                        '<option value="' + "Đang giao" + '">' + "Đang giao" + '</option>' +
+                        '<option value="' + "Đã giao" + '">' + "Đã giao" + '</option>';
+                }
+
+                function search_order_bystatus() {
+                    var id_shp1 = localStorage.getItem("senddata_login_shipper");
+                    id_shp1 = JSON.parse(id_shp1);
+
+
+                    document.getElementById("data_table_service").innerHTML = "";
+
+
+
+                    var temp_service = document.getElementById('allcategory').value;
+                    console.log(temp_service);
+                    get_orders_ofshipper_bystatus(temp_service);
                 }
             </script>
 
@@ -233,43 +301,44 @@
                 var form = document.getElementById('add5');
                 form.addEventListener('submit', function (event) {
                     event.preventDefault();
-                    search_service();
+                    search_order_bystatus();
                 });
 
             </script>
 
             {{!-- đổ dữ liệu lên table --}}
             <script>
-                get_noorders((result) => {
+                var id_shp = localStorage.getItem("senddata_login_shipper");
+                id_shp = JSON.parse(id_shp);
+
+                get_orders_ofshipper(id_shp[0].id, (result) => {
 
                     var birds = result;
 
-                    var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
+                    
+                    var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
                     var ele = document.getElementById('data_table_service');
-                    console.log(ele);
 
-                    console.log(birds.length);
-                    console.log(birds[0].phiShip);
                     for (var i = 0; i < birds.length; i++) {
 
                         // POPULATE SELECT ELEMENT WITH JSON.
-                        ele.innerHTML = ele.innerHTML +   
-                            
+                        ele.innerHTML = ele.innerHTML +
                             "<tr>" +
-                           
+                            "<td hidden>" + birds[i].id + "</td>" +
                             "<td>" + birds[i].phiShip + "</td>" +
-                           
                             "<td>" + birds[i].tongTien + "</td>" +
                             "<td>" + birds[i].tinhTrangDonHang + "</td>" +
                             "<td>" + birds[i].ngayLapDon + "</td>" +
-                            "<td>" + html + "</td>" +
-                         
+                            "<td>" + html1 + "</td>" +
+                           
                             "</tr>";
-                          
+
+                        onClick = "homeForm(\''+myForm+'\',\''+divName+'\')"
+
                     }
-             
+
                     document.getElementById("data_table_service").innerHTML = ele.innerHTML;
-      
+
                 });
             </script>
 

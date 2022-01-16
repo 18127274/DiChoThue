@@ -34,13 +34,13 @@
 
             <div class="col-md-7 col-lg-8">
 
-                <h4 class="mb-3">Billing address</h4>
+                <h4 class="mb-3">Giỏ Hàng</h4>
 
 
                 <div class="col-md-5 col-lg-4 order-md-last">
 
                     <h4 class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-primary">Your cart</span>
+                        <span class="text-primary">Danh sách sản phẩm</span>
                         <span class="badge bg-primary rounded-pill"></span>
                     </h4>
                     <ul class="list-group mb-3">
@@ -56,6 +56,7 @@
                                     <th>Tổng tiền</th>
                                     <th>Xóa đơn hàng</th>
                                 </tr>
+
                             </thead>
 
                             <tbody id="data_cart">
@@ -65,19 +66,33 @@
 
                             </tbody>
 
+
                         </table>
 
 
                     </ul>
+                    <form id="add1">
+                        <input type="submit" class="w-45 btn btn-primary" value="Payment">
+                    </form>
                 </div>
 
 
-                <form id="add1">
-
-                    <input type="submit" class="w-45 btn btn-primary" value="Payment">
-                </form>
 
 
+                <script language="javascript">
+
+                    function validateSelectBox(obj) {
+
+                        var options = obj.children;
+                        var html = '';
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].selected) {
+                                html += options[i].value;
+                            }
+                        }
+
+                    }
+                </script>
 
 
                 <script>
@@ -100,7 +115,6 @@
 
                                 var giatien = result.dsgioHang[i].tongChiTiet / result.dsgioHang[i].chitietgh.sl;
 
-
                                 ele.innerHTML = ele.innerHTML + "<tr>" +
                                     "<td hidden>" + result.dsgioHang[i].chitietgh.id + "</td>" +
                                     "<td>" + result.dsgioHang[i].tenSP + "</td>" +
@@ -117,7 +131,9 @@
                                 "<td>" + " " + "</td>" +
                                 "<td>" + " " + "</td>" +
                                 "<td>" + result.giohang.tongTien + "</td>" +
+
                                 "</tr>";
+                            localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
 
 
                         })
@@ -135,6 +151,7 @@
                 {{!-- function delete row --}}
                 <script>
 
+                    console.log("ss");
                     /*var id_service = localStorage.getItem("senddata");*/
                     function deleteRow(r) {
 
@@ -150,13 +167,10 @@
 
                             delete_service_ofcart(index);
 
-                        } else {
-
                         }
                         var myobj = document.getElementById("data_cart").innerHTML = "";
                         var myobj = document.getElementById("data_cart");
                         console.log(myobj);
-                        document.getElementById("data_cart").innerHTML = "";
 
                         Update_cart();
                     }
@@ -169,28 +183,11 @@
                     form.addEventListener('submit', function (event) {
                         event.preventDefault();
 
-                        var myArrayFromLocalStorage2 = localStorage.getItem('send_arr_service')
-                        var id_service_arr2 = JSON.parse(myArrayFromLocalStorage2)
-                        console.log(id_service_arr2);
+                        var id_giohang = localStorage.getItem("id_gh");
 
-                        var total_price1 = localStorage.getItem("total_price_local");
-                        var id_emp = document.getElementById('allemp').value;
+                        console.log(id_giohang);
 
-                        var date = formatDate(document.getElementById('date').value);
-                        var time = document.getElementById('time').value;
-                        var Name = document.getElementById('Name').value;
-                        var email = document.getElementById('email').value;
-                        var phone = document.getElementById('phone').value;
-                        console.log(id_service_arr2);
-
-                        console.log(id_emp);
-                        console.log(date);
-                        console.log(time);
-                        console.log(Name);
-                        console.log(email);
-                        console.log(total_price1);
-                        console.log(phone);
-                        add_booking(date, time, Name, phone, email, total_price1, id_emp, id_service_arr2);
+                        add_booking(id_giohang, 30000);
 
 
                     });
