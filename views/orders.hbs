@@ -80,18 +80,13 @@
 
                             </nav>
                         </div>
-                        <!--branch-->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapsebranch" aria-expanded="false" aria-controls="collapsebranch">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Products
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsebranch" aria-labelledby="headingOne"
+
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/shp_list_orders">My Orders</a>
-                                <a class="nav-link" href="/shp_add_products">Add Products</a>
+                                {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
+                                <a class="nav-link" href="/orders">Orders</a>
+
                             </nav>
                         </div>
 
@@ -145,9 +140,10 @@
                                         <th>Phí ship</th>
                                         <th>Tổng tiền</th>
                                         <th>Tình trạng đơn hàng</th>
+                                        <th>Tình trạng thanh toán</th>
                                         <th>Ngày lập đơn</th>
                                         <th>Cập nhật</th>
-                                       
+
                                     </tr>
                                 </thead>
 
@@ -216,7 +212,7 @@
                     var i = r.parentNode.parentNode.rowIndex;
                     var j = document.getElementsByTagName("tr")[i];
 
-             
+
                     var madh = j.childNodes[0].innerHTML;
                     var tinhtrang = j.childNodes[3].innerHTML;
 
@@ -233,7 +229,7 @@
                             document.getElementById("data_table_service").innerHTML = "";
                             update_status_order(madh, "Đã lấy hàng");
 
-                           
+
                             get_orders_ofshipper_bystatus(temp_service1);
                         }
                         else if (tinhtrang == "Đã lấy hàng") {
@@ -252,7 +248,7 @@
                             get_orders_ofshipper_bystatus(temp_service1);
                         }
                         else if (tinhtrang == "Đã giao") {
-
+                            update_status_payment(madh, "Đã thanh toán");
                             alert("không thể cập nhật");
                         }
                     }
@@ -315,7 +311,7 @@
 
                     var birds = result;
 
-                    
+
                     var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
                     var ele = document.getElementById('data_table_service');
 
@@ -328,9 +324,10 @@
                             "<td>" + birds[i].phiShip + "</td>" +
                             "<td>" + birds[i].tongTien + "</td>" +
                             "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+                            "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
                             "<td>" + birds[i].ngayLapDon + "</td>" +
                             "<td>" + html1 + "</td>" +
-                           
+
                             "</tr>";
 
                         onClick = "homeForm(\''+myForm+'\',\''+divName+'\')"

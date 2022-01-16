@@ -47,13 +47,14 @@
                         <table class="table table-bordered" id="myTable" width="1000%" height="1000%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th hidden>ID</th>
+                                    <th>ID</th>
 
 
-                                    <th>Tên sản phẩm</th>
-                                    <th>Giá tiền</th>
-                                    <th>Số lượng</th>
+                                    <th>Phí ship</th>
                                     <th>Tổng tiền</th>
+                                    <th>Tình trạng đơn hàng</th>
+                                     <th>Tình trạng thanh toán</th>
+                                    <th>Ngày lập đơn</th>
                                     <th>Xóa đơn hàng</th>
                                 </tr>
 
@@ -69,7 +70,7 @@
 
 
                     </ul>
-                
+
                 </div>
 
 
@@ -102,36 +103,23 @@
                         var id_kh = localStorage.getItem("senddata_login");
                         id_kh = JSON.parse(id_kh);
 
+                        console.log(id_kh[0].id);
 
-                        view_cartof_customer(id_kh[0].id, (result) => {
+                        get_orderofcustomer(id_kh[0].id, (result) => {
                             /*id_service_arr = id_service_arr.split(',');*/
-
-
-                            for (let i = 0; i < result.dsgioHang.length; i++) {
-
-                                var giatien = result.dsgioHang[i].tongChiTiet / result.dsgioHang[i].chitietgh.sl;
-
-                                ele.innerHTML = ele.innerHTML + "<tr>" +
-                                    "<td hidden>" + result.dsgioHang[i].chitietgh.id + "</td>" +
-                                    "<td>" + result.dsgioHang[i].tenSP + "</td>" +
-                                    "<td>" + giatien + "</td>" +
-                                    "<td>" + result.dsgioHang[i].chitietgh.sl + "</td>" +
-                                    "<td>" + result.dsgioHang[i].tongChiTiet + "</td>" +
-                                    "<td>" + html + "</td></tr>";
-
-
-                            }
-
-                            ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + "Tổng hóa đơn" + "</td>" +
-                                "<td>" + " " + "</td>" +
-                                "<td>" + " " + "</td>" +
-                                "<td>" + result.giohang.tongTien + "</td>" +
+                            for (let i = 0; i < result.length; i++) {
+                                ele.innerHTML = ele.innerHTML     +       "<tr>" +
+                                "<td>" + birds[i].id + "</td>" +
+                                "<td>" + birds[i].phiShip + "</td>" +
+                                "<td>" + birds[i].tongTien + "</td>" +
+                                "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+                                "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
+                                "<td>" + birds[i].ngayLapDon + "</td>" +
+                                "<td>" + html1 + "</td>" +
 
                                 "</tr>";
-                            localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
-
-
+                            }
+                            document.getElementById("data_cart").innerHTML = ele.innerHTML;
                         })
                         /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
 
@@ -151,7 +139,7 @@
                     /*var id_service = localStorage.getItem("senddata");*/
                     function deleteRow(r) {
 
-                        var c = confirm("Are you sure delete?");
+                        var c = confirm("Bạn có chắc muốn xóa đơn hàng này?");
                         if (c == true) {
                             var i = r.parentNode.parentNode.rowIndex;
                             var j = document.getElementsByTagName("tr")[i];
@@ -161,7 +149,7 @@
                             console.log(i);
                             document.getElementById("myTable").deleteRow(i);
 
-                            delete_service_ofcart(index);
+                            Delete_order(index);
 
                         }
                         var myobj = document.getElementById("data_cart").innerHTML = "";
@@ -173,8 +161,46 @@
                 </script>
 
 
+                {{!-- đổ dữ liệu lên table --}}
+                <script>
+                    var id_kh = localStorage.getItem("senddata_login");
+                    id_kh = JSON.parse(id_kh);
 
-               
+                    console.log(id_kh[0].id);
+
+                    get_orderofcustomer(id_kh[0].id, (result) => {
+
+                        var birds = result;
+
+                        var html1 = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
+                        var ele = document.getElementById('data_cart');
+
+                        console.log(result);
+                        for (var i = 0; i < birds.length; i++) {
+
+                            // POPULATE SELECT ELEMENT WITH JSON.
+                            ele.innerHTML = ele.innerHTML +
+                                "<tr>" +
+                                "<td>" + birds[i].id + "</td>" +
+                                "<td>" + birds[i].phiShip + "</td>" +
+                                "<td>" + birds[i].tongTien + "</td>" +
+                                "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+                                "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
+                                "<td>" + birds[i].ngayLapDon + "</td>" +
+                                "<td>" + html1 + "</td>" +
+
+                                "</tr>";
+
+                            onClick = "homeForm(\''+myForm+'\',\''+divName+'\')"
+
+                        }
+
+                        document.getElementById("data_cart").innerHTML = ele.innerHTML;
+
+                    });
+                </script>
+
+
 
             </div>
         </div>
