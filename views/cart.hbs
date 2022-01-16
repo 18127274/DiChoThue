@@ -96,8 +96,8 @@
                 <script>
 
                     function Update_cart() {
-                        
-                         window.location.href = "http://localhost:8888/cart";
+
+                        window.location.href = "http://localhost:8888/cart";
                         var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
 
                         var ele = document.getElementById('data_cart');
@@ -159,16 +159,16 @@
 
                             console.log(index);
                             console.log(i);
-                            document.getElementById("myTable").deleteRow(i);
 
                             delete_service_ofcart(index);
+                            document.getElementById("myTable").deleteRow(i);
 
                         }
                         Update_cart();
-                        
-                    
 
-                        
+
+
+
                     }
                 </script>
 

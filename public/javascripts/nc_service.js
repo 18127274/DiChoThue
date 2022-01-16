@@ -323,8 +323,6 @@ function update_status_order(orders, status) {
       console.log(status);
       if (data != "") {
         alert("Cập nhật thành công");
-       
-
       }
       else {
         alert("Cập nhật thất bại");

@@ -18,7 +18,7 @@
 <!-- Page content-->
 <div class="bg-white">
 	<div class="container py-5">
-		
+
 		<div class="row">
 			<!-- Side widgets-->
 			<div class="col-lg-4">
@@ -106,6 +106,20 @@
 		$(this).find('i').toggleClass('fa-minus fa-plus ')
 	});
 
+
+
+	/*ham xu ly anh*/
+	function Xulyanh(link) {
+		link = link.split('d/');
+		console.log(link);
+		link = link[1];
+		console.log(link);
+		link = link.split('/');
+		console.log(link);
+		link = link[0];
+		console.log(link);
+		return link;
+	}
 </script>
 
 
@@ -154,7 +168,7 @@
 					"<div class=\"col-lg-6\">" +
 					"<div class=\"card mb-4\">" +
 					"<a href=\"#!\">" +
-					"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+					"<img class=\"card-img-top\" src=\"https://drive.google.com/uc?export=view&id="+Xulyanh(""+birds[i].image+"")+"\">" +
 					"</a>" +
 					"<div class=\"card-body\">" +
 
@@ -173,7 +187,7 @@
 
 
 
-	} 
+	}
 
 </script>
 
@@ -204,8 +218,8 @@
 			ele.innerHTML = ele.innerHTML +
 				"<div class=\"col-lg-6\">" +
 				"<div class=\"card mb-4\">" +
-				"<a href=\"#!\">" +
-				"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+				"<a href=\"https://drive.google.com/file/d/1d3XqbQdX_--6zWB0lmmNEnX64453yciP/view\">" +
+				"<img class=\"card-img-top\"  src=\"https://drive.google.com/uc?export=view&id="+Xulyanh(""+birds[i].image+"")+"\">" +
 				"</a>" +
 				"<div class=\"card-body\">" +
 
@@ -239,7 +253,7 @@
 				ele.innerHTML = ele.innerHTML + "<div class=\"col-lg-6\">" +
 					"<div class=\"card mb-4\">" +
 					"<a href=\"#!\">" +
-					"<img class=\"card-img-top\" src=\"https://dummyimage.com/700x350/dee2e6/6c757d.jpg\"/>" +
+					"<img class=\"card-img-top\" src=\"https://drive.google.com/uc?export=view&id="+Xulyanh(""+birds[i].image+"")+"\">" +
 					"</a>" +
 					"<div class=\"card-body\">" +
 

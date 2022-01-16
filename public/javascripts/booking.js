@@ -95,14 +95,7 @@ function add_product_into_cart(masanpham, makhachhang, soluong) {
   }).then(res =>
     res.json().then(data => {
       console.log(data);
-      if (data != "") {
-        alert("Thêm sản phẩm thành công");
-        console.log(data.lenght);
-
-      }
-      else {
-        alert("Không đủ số lượng sản phẩm");
-      }
+    
     })
   );
 }

@@ -184,7 +184,7 @@
 
                 }
 
-            
+
 
                 /*ham cap nhat tinh trang don hang*/
                 function Update_status(r) {
@@ -206,31 +206,29 @@
 
                             var temp_service1 = document.getElementById('allcategory').value;
                             console.log(temp_service1);
-                           
+
                             update_status_order(madh, "Đã lấy hàng");
                             document.getElementById("myTable").deleteRow(i);
 
-                            get_orders_ofshipper_bystatus(temp_service1);
+
                         }
                         else if (tinhtrang == "Đã lấy hàng") {
-                           
+
                             update_status_order(madh, "Đang giao");
                             document.getElementById("myTable").deleteRow(i);
 
-                            search_order_bystatus();
-                            get_orders_ofshipper_bystatus(temp_service1);
+            
                         }
                         else if (tinhtrang == "Đang giao") {
-                            document.getElementById("data_table_service").innerHTML = "";
+                            
                             update_status_order(madh, "Đã giao");
                             update_status_payment(madh, "Đã thanh toán");
-                            
+
                             var temp_service1 = document.getElementById('allcategory').value;
-                            console.log(temp_service1);
-                            get_orders_ofshipper_bystatus(temp_service1);
+                            document.getElementById("myTable").deleteRow(i);
                         }
                         else if (tinhtrang == "Đã giao") {
-                          
+
                             alert("không thể cập nhật");
                         }
                     }
