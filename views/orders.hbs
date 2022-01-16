@@ -184,29 +184,7 @@
 
                 }
 
-                /* function Update_status(order_id, status) {
-                    console.log(order_id);
-                    console.log(status);
-                    console.log("dit con me m")
-                    var r = confirm("Bạn có chắc muốn cập nhật tình trạng đơn hàng này?");
-                    if (r == true) {
-                        if (status == "Đã tiếp nhận") {
-                            update_status_order(order_id, "Đã lấy hàng");
-                        }
-                        else if (status == "Đã lấy hàng") {
-                            update_status_order(order_id, "Đang giao");
-                        }
-                        else if (status == "Đang giao") {
-                            update_status_order(order_id, "Đã giao");
-                        }
-                        else if (status == "Đã giao") {
-                            alert("không thể cập nhật");
-                        }
-                    } else {
-
-                    }
-
-                }*/
+            
 
                 /*ham cap nhat tinh trang don hang*/
                 function Update_status(r) {
@@ -228,15 +206,16 @@
 
                             var temp_service1 = document.getElementById('allcategory').value;
                             console.log(temp_service1);
-                            document.getElementById("data_table_service").innerHTML = "";
+                           
                             update_status_order(madh, "Đã lấy hàng");
-
+                            document.getElementById("myTable").deleteRow(i);
 
                             get_orders_ofshipper_bystatus(temp_service1);
                         }
                         else if (tinhtrang == "Đã lấy hàng") {
-                            document.getElementById("data_table_service").innerHTML = "";
+                           
                             update_status_order(madh, "Đang giao");
+                            document.getElementById("myTable").deleteRow(i);
 
                             search_order_bystatus();
                             get_orders_ofshipper_bystatus(temp_service1);
@@ -244,7 +223,8 @@
                         else if (tinhtrang == "Đang giao") {
                             document.getElementById("data_table_service").innerHTML = "";
                             update_status_order(madh, "Đã giao");
-                              update_status_payment(madh, "Đã thanh toán");
+                            update_status_payment(madh, "Đã thanh toán");
+                            
                             var temp_service1 = document.getElementById('allcategory').value;
                             console.log(temp_service1);
                             get_orders_ofshipper_bystatus(temp_service1);
