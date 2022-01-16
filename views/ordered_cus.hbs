@@ -96,6 +96,7 @@
 
                     function Update_cart() {
 
+                        window.location.href = "http://localhost:8888/ordered_cus";
                         var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
                        
                         var ele = document.getElementById('data_cart');
@@ -160,9 +161,7 @@
                             
 
                         }
-                        var myobj = document.getElementById("data_cart").innerHTML = "";
-                   
-                        console.log(myobj);
+                       
                         Update_cart();
                     }
                 </script>
