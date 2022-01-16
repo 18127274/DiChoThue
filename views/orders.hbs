@@ -51,6 +51,8 @@
                 </ul>
             </li>
         </ul>
+
+
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -76,7 +78,7 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
-                                <a class="nav-link" href="/shp_list_orders">My Orders</a>
+                                <a class="nav-link" href="/shp_list_orders">Orders</a>
 
                             </nav>
                         </div>
@@ -85,7 +87,7 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
-                                <a class="nav-link" href="/orders">Orders</a>
+                                <a class="nav-link" href="/orders">My Orders</a>
 
                             </nav>
                         </div>
@@ -242,13 +244,13 @@
                         else if (tinhtrang == "Đang giao") {
                             document.getElementById("data_table_service").innerHTML = "";
                             update_status_order(madh, "Đã giao");
-
+                              update_status_payment(madh, "Đã thanh toán");
                             var temp_service1 = document.getElementById('allcategory').value;
                             console.log(temp_service1);
                             get_orders_ofshipper_bystatus(temp_service1);
                         }
                         else if (tinhtrang == "Đã giao") {
-                            update_status_payment(madh, "Đã thanh toán");
+                          
                             alert("không thể cập nhật");
                         }
                     }

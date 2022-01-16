@@ -97,7 +97,7 @@
                     function Update_cart() {
 
                         var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
-
+                       
                         var ele = document.getElementById('data_cart');
 
                         var id_kh = localStorage.getItem("senddata_login");
@@ -106,16 +106,17 @@
                         console.log(id_kh[0].id);
 
                         get_orderofcustomer(id_kh[0].id, (result) => {
+                            console.log(result.length);
                             /*id_service_arr = id_service_arr.split(',');*/
                             for (let i = 0; i < result.length; i++) {
                                 ele.innerHTML = ele.innerHTML     +       "<tr>" +
-                                "<td>" + birds[i].id + "</td>" +
-                                "<td>" + birds[i].phiShip + "</td>" +
-                                "<td>" + birds[i].tongTien + "</td>" +
-                                "<td>" + birds[i].tinhTrangDonHang + "</td>" +
-                                "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
-                                "<td>" + birds[i].ngayLapDon + "</td>" +
-                                "<td>" + html1 + "</td>" +
+                                "<td>" + result[i].id + "</td>" +
+                                "<td>" + result[i].phiShip + "</td>" +
+                                "<td>" + result[i].tongTien + "</td>" +
+                                "<td>" + result[i].tinhTrangDonHang + "</td>" +
+                                "<td>" + result[i].tinhTrangThanhToan + "</td>" +
+                                "<td>" + result[i].ngayLapDon + "</td>" +
+                                "<td>" + html + "</td>" +
 
                                 "</tr>";
                             }
@@ -124,7 +125,7 @@
                         /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
 
                     }
-                    Update_cart();
+                   
                 </script>
 
                 <script type='text/x-handlebars-template' id='emp-table'></script>
@@ -144,18 +145,24 @@
                             var i = r.parentNode.parentNode.rowIndex;
                             var j = document.getElementsByTagName("tr")[i];
                             var index = j.childNodes[0].innerHTML;
+                            var index1 = j.childNodes[3].innerHTML;
 
                             console.log(index);
-                            console.log(i);
-                            document.getElementById("myTable").deleteRow(i);
-
-                            Delete_order(index);
+                            console.log(index1);
+                            if(index1 == "Chờ tiếp nhận"){
+                                console.log(index1);
+                                Delete_order(index);
+                                document.getElementById("myTable").deleteRow(i);
+                            }
+                            else {
+                                alert("Không thể hủy đơn hàng này");
+                            }
+                            
 
                         }
                         var myobj = document.getElementById("data_cart").innerHTML = "";
-                        var myobj = document.getElementById("data_cart");
+                   
                         console.log(myobj);
-
                         Update_cart();
                     }
                 </script>

@@ -62,8 +62,6 @@
                             <tbody id="data_cart">
 
 
-
-
                             </tbody>
 
 
@@ -98,7 +96,7 @@
                 <script>
 
                     function Update_cart() {
-
+                        document.getElementById("data_cart").innerHTML = "";
                         var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
 
                         var ele = document.getElementById('data_cart');
@@ -134,13 +132,10 @@
 
                                 "</tr>";
                             localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
-
-
                         })
                         /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
-
                     }
-                    Update_cart();
+
                 </script>
 
                 <script type='text/x-handlebars-template' id='emp-table'></script>
@@ -155,7 +150,7 @@
                     /*var id_service = localStorage.getItem("senddata");*/
                     function deleteRow(r) {
 
-                        var c = confirm("Are you sure delete?");
+                        var c = confirm("Bạn có chắc muốn xóa sản phẩm này?");
                         if (c == true) {
                             var i = r.parentNode.parentNode.rowIndex;
                             var j = document.getElementsByTagName("tr")[i];
@@ -168,12 +163,52 @@
                             delete_service_ofcart(index);
 
                         }
-                        var myobj = document.getElementById("data_cart").innerHTML = "";
-                        var myobj = document.getElementById("data_cart");
-                        console.log(myobj);
-
                         Update_cart();
+                        
+                    
+
+                        
                     }
+                </script>
+
+
+                {{!-- đổ dữ liệu lên table --}}
+                <script>
+                    var id_kh = localStorage.getItem("senddata_login");
+                    id_kh = JSON.parse(id_kh);
+
+                    var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
+                    var ele = document.getElementById('data_cart');
+
+
+                    console.log(id_kh[0].id);
+                    view_cartof_customer(id_kh[0].id, (result) => {
+                        /*id_service_arr = id_service_arr.split(',');*/
+
+
+                        for (let i = 0; i < result.dsgioHang.length; i++) {
+
+                            var giatien = result.dsgioHang[i].tongChiTiet / result.dsgioHang[i].chitietgh.sl;
+
+                            ele.innerHTML = ele.innerHTML + "<tr>" +
+                                "<td hidden>" + result.dsgioHang[i].chitietgh.id + "</td>" +
+                                "<td>" + result.dsgioHang[i].tenSP + "</td>" +
+                                "<td>" + giatien + "</td>" +
+                                "<td>" + result.dsgioHang[i].chitietgh.sl + "</td>" +
+                                "<td>" + result.dsgioHang[i].tongChiTiet + "</td>" +
+                                "<td>" + html + "</td></tr>";
+
+
+                        }
+
+                        ele.innerHTML = ele.innerHTML + "<tr>" +
+                            "<td>" + "Tổng hóa đơn" + "</td>" +
+                            "<td>" + " " + "</td>" +
+                            "<td>" + " " + "</td>" +
+                            "<td>" + result.giohang.tongTien + "</td>" +
+
+                            "</tr>";
+                    })
                 </script>
 
 
