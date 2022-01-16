@@ -132,6 +132,12 @@ router.get('/orders', function (req, res, next) {
   res.render('orders', {layout: 'admin'}) 
 });
 
+router.get('/ordered_cus', function (req, res, next) {
+  res.render('ordered_cus', {layout: 'customer'}) 
+});
+
+
+
 
 
 

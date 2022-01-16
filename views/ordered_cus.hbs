@@ -69,9 +69,7 @@
 
 
                     </ul>
-                    <form id="add1">
-                        <input type="submit" class="w-45 btn btn-primary" value="Payment">
-                    </form>
+                
                 </div>
 
 
@@ -176,21 +174,7 @@
 
 
 
-                <script>
-                    var form = document.getElementById('add1');
-                    form.addEventListener('submit', function (event) {
-                        event.preventDefault();
-
-                        var id_giohang = localStorage.getItem("id_gh");
-
-                        console.log(id_giohang);
-
-                        add_booking(id_giohang, 30000);
-
-
-                    });
-                </script>
-                {{!-- doc cac du lieu va goi api add booking --}}
+               
 
             </div>
         </div>
