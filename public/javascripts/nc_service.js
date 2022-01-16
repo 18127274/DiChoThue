@@ -93,6 +93,25 @@ function get_Products(callback) {
   );
 }
 
+function get_orderofcustomer(id_kh, callback) {
+  var array = [];
+  GET('http://localhost:8080/api/donmua/' + id_kh).then(res =>
+    res.json().then(data => {
+      var template = $('#service-table').html();
+      var compiled = Handlebars.compile(template);
+
+      var contextualHtml = compiled({ allservices: data });
+      $('#allservices').html(contextualHtml);
+      array = data;
+      console.log(array);
+      return callback(array);
+    })
+  );
+}
+
+
+
+
 function get_noorders(callback) {
   var array = [];
   GET('http://localhost:8080/api/donchuanhan').then(res =>
@@ -196,6 +215,7 @@ function get_orders_ofshipper_bystatus(status) {
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+          "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
           
@@ -218,6 +238,7 @@ function get_orders_ofshipper_bystatus(status) {
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+          "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
          
@@ -241,6 +262,7 @@ function get_orders_ofshipper_bystatus(status) {
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+          "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
         
@@ -263,6 +285,7 @@ function get_orders_ofshipper_bystatus(status) {
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+          "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
         
@@ -310,7 +333,37 @@ function update_status_order(orders, status) {
   );
 }
 
+function update_status_payment(orders, status) {
+  PUT('http://localhost:8080/api/tinhtrangthanhtoan?MaDH_input=' +orders+ '&TinhTrangTT_input=' + status).then(res =>
+    res.json().then(data => {
+      console.log(orders);
+      console.log(status);
+      if (data != "") {
+        alert("Cập nhật thành công");
+      }
+      else {
+        alert("Cập nhật thất bại");
+      }
+    })
+  );
+}
 
+
+
+function Delete_order(id) {
+  DELETE('http://localhost:8080/api/xoadonhang/' + id, {
+
+  }).then(res =>
+    res.json().then(data => {
+      if (data != "") {
+        alert("Xóa thành công");
+      }
+      else {
+        alert("Failed Deleted");
+      }
+    })
+  );
+}
 
 
 function Delete_service(id) {

@@ -149,8 +149,6 @@ function Receive_order(mashp, madonhang) {
      "MaShipper_input": mashp,
      "MaDH_input": madonhang
    }).then(res => */
-  var a = 'http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang;
-  console.log(a);
   PUT('http://localhost:8080/api/tiepnhandonhang?MaShipper_input=' + mashp + '&MaDH_input=' + madonhang).then(res =>
     res.json().then(data => {
       console.log(data);
