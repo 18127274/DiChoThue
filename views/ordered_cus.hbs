@@ -1,0 +1,205 @@
+<script src="../javascripts/api.js"></script>
+<script type="text/javascript" src="../javascripts/booking.js"> </script>
+<script type="text/javascript" src="../javascripts/cart.js"> </script>
+<script type="text/javascript" src="../javascripts/nc_service.js"> </script>
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/stylebutton.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/styles2.css" />
+<img class="card-img" src="/Header.png" alt="..." />
+
+
+
+
+<!--
+ Contact Block -->
+
+{{!-- còn cái phần này là phần giao diện chính của cart khi nào dùng thì mở comment ra là dc --}}
+<!-- cart-->
+<section id="cart" class="  bg-white">
+    <div class="container py-5">
+
+
+        <div class="row g-5">
+            {{!-- phan gio hang --}}
+
+
+            {{!-- đang cấn đoạn này --}}
+
+
+            {{!-- fill infor listcard --}}
+
+
+
+
+
+            <div class="col-md-7 col-lg-8">
+
+                <h4 class="mb-3">Giỏ Hàng</h4>
+
+
+                <div class="col-md-5 col-lg-4 order-md-last">
+
+                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-primary">Danh sách sản phẩm</span>
+                        <span class="badge bg-primary rounded-pill"></span>
+                    </h4>
+                    <ul class="list-group mb-3">
+                        <table class="table table-bordered" id="myTable" width="1000%" height="1000%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th hidden>ID</th>
+
+
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá tiền</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Xóa đơn hàng</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="data_cart">
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </ul>
+                    <form id="add1">
+                        <input type="submit" class="w-45 btn btn-primary" value="Payment">
+                    </form>
+                </div>
+
+
+
+
+                <script language="javascript">
+
+                    function validateSelectBox(obj) {
+
+                        var options = obj.children;
+                        var html = '';
+                        for (var i = 0; i < options.length; i++) {
+                            if (options[i].selected) {
+                                html += options[i].value;
+                            }
+                        }
+
+                    }
+                </script>
+
+
+                <script>
+
+                    function Update_cart() {
+
+                        var html = "<input type=\"button\" value=\"x\" onclick=\"deleteRow(this)\">";
+
+                        var ele = document.getElementById('data_cart');
+
+                        var id_kh = localStorage.getItem("senddata_login");
+                        id_kh = JSON.parse(id_kh);
+
+
+                        view_cartof_customer(id_kh[0].id, (result) => {
+                            /*id_service_arr = id_service_arr.split(',');*/
+
+
+                            for (let i = 0; i < result.dsgioHang.length; i++) {
+
+                                var giatien = result.dsgioHang[i].tongChiTiet / result.dsgioHang[i].chitietgh.sl;
+
+                                ele.innerHTML = ele.innerHTML + "<tr>" +
+                                    "<td hidden>" + result.dsgioHang[i].chitietgh.id + "</td>" +
+                                    "<td>" + result.dsgioHang[i].tenSP + "</td>" +
+                                    "<td>" + giatien + "</td>" +
+                                    "<td>" + result.dsgioHang[i].chitietgh.sl + "</td>" +
+                                    "<td>" + result.dsgioHang[i].tongChiTiet + "</td>" +
+                                    "<td>" + html + "</td></tr>";
+
+
+                            }
+
+                            ele.innerHTML = ele.innerHTML + "<tr>" +
+                                "<td>" + "Tổng hóa đơn" + "</td>" +
+                                "<td>" + " " + "</td>" +
+                                "<td>" + " " + "</td>" +
+                                "<td>" + result.giohang.tongTien + "</td>" +
+
+                                "</tr>";
+                            localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
+
+
+                        })
+                        /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
+
+                    }
+                    Update_cart();
+                </script>
+
+                <script type='text/x-handlebars-template' id='emp-table'></script>
+                <script type='text/x-handlebars-template' id='service-table'></script>
+                <script type='text/x-handlebars-template' id='booking-table'></script>
+
+
+                {{!-- function delete row --}}
+                <script>
+
+                    console.log("ss");
+                    /*var id_service = localStorage.getItem("senddata");*/
+                    function deleteRow(r) {
+
+                        var c = confirm("Are you sure delete?");
+                        if (c == true) {
+                            var i = r.parentNode.parentNode.rowIndex;
+                            var j = document.getElementsByTagName("tr")[i];
+                            var index = j.childNodes[0].innerHTML;
+
+                            console.log(index);
+                            console.log(i);
+                            document.getElementById("myTable").deleteRow(i);
+
+                            delete_service_ofcart(index);
+
+                        }
+                        var myobj = document.getElementById("data_cart").innerHTML = "";
+                        var myobj = document.getElementById("data_cart");
+                        console.log(myobj);
+
+                        Update_cart();
+                    }
+                </script>
+
+
+
+                <script>
+                    var form = document.getElementById('add1');
+                    form.addEventListener('submit', function (event) {
+                        event.preventDefault();
+
+                        var id_giohang = localStorage.getItem("id_gh");
+
+                        console.log(id_giohang);
+
+                        add_booking(id_giohang, 30000);
+
+
+                    });
+                </script>
+                {{!-- doc cac du lieu va goi api add booking --}}
+
+            </div>
+        </div>
+
+
+
+    </div>
+</section>
+
+
+{{!-- Cái phần này là cái form để demo thêm 1 service thông qua điền form rồi click nút add_service sẽ gọi api
+add_service --}}
