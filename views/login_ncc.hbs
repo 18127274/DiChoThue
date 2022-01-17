@@ -37,9 +37,8 @@
                                         placeholder="Mật khẩu">
                                 </div>
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Đăng nhập">
-                                
                             </form>
-            
+
 
                         </div>
                     </div>
@@ -82,13 +81,13 @@
 
         var usern = document.getElementById('username').value;
         var password = document.getElementById('pass').value;
+
         console.log(usern);
         console.log(password);
-        dangnhap_khachhang(usern, password);
-        var data_login = localStorage.getItem('senddata_login');
-        /*console.log(JSON.parse(data_login));
-        console.log(typeof (data_login));/*
-        /*console.log(Object.values(data_login));*/
+        dangnhap_ncc(usern, password);
+        var data_login = username + ',' + pass;
+        var data_login = localStorage.getItem('senddata_login_shipper');
+       
 
     });
 </script>

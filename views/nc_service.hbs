@@ -11,11 +11,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     {{!--
     <link href="css/styles.css" rel="stylesheet" /> --}}
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+
 
     <script src="../javascripts/api.js"></script>
     <script type="text/javascript" src="../javascripts/cart.js"> </script>
@@ -28,7 +34,7 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/nc_service">Admin Managed</a>
+        <a class="navbar-brand ps-3" href="/shipper">Shipper</a>
 
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto me-0 me-md-3 my-2 my-md-0">
@@ -45,6 +51,8 @@
                 </ul>
             </li>
         </ul>
+
+
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
@@ -52,11 +60,11 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
 
-                        <div class="sb-sidenav-menu-heading">Admin Management</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                        <div class="sb-sidenav-menu-heading">Supplier Management</div>
+                        <a class="nav-link collapsed" href="http://localhost:8888/orders" data-bs-toggle="collapse"
                             data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Nail Category
+                            Orders
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         {{!-- <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
@@ -70,81 +78,19 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
-                                <a class="nav-link" href="/nc_service">List Service</a>
-                                <a class="nav-link" href="/add_service">Add Service</a>
-                                <a class="nav-link" href="/list_product">List Product</a>
-                                <a class="nav-link" href="/add_product">Add Product</a>
-                            </nav>
-                        </div>
-                        <!--branch-->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapsebranch" aria-expanded="false" aria-controls="collapsebranch">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Branch
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsebranch" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/list_branch">List Branch</a>
-                                <a class="nav-link" href="/add_branch">Add Branch</a>
-                            </nav>
-                        </div>
-                        <!--employee-->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseemployee" aria-expanded="false" aria-controls="collapseemployee">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Employee
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseemployee" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/list_employee">List Employee</a>
-                                <a class="nav-link" href="/add_employee">Add Employee</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-                            aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                            Nail Booking
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/admin_booking">Booking Managed</a>
+                                <a class="nav-link" href="/shp_list_orders">Orders</a>
+
                             </nav>
                         </div>
 
-                        <!-- muc nail customer -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseCustomer" aria-expanded="false" aria-controls="collapseCustomer">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Nail Customer
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseCustomer" aria-labelledby="headingOne"
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="/list_customer">View Customer</a>
+                                {{!-- <a class="nav-link" href="../../test2/views/nc_service.hbs">Service</a> --}}
+                                <a class="nav-link" href="/orders">My Orders</a>
+
                             </nav>
                         </div>
-
-                        <!-- muc busiess analyst report -->
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
-                            data-bs-target="#collapseReport" aria-expanded="false" aria-controls="collapseReport">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Business Analyst
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseReport" aria-labelledby="headingOne"
-                            data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                 <a class="nav-link" href="/admin_booking">Booking Managed</a>
-                            </nav>
-                        </div>
-
 
                     </div>
                 </div>
@@ -157,67 +103,22 @@
 
         <div id="layoutSidenav_content">
             <div class="container-fluid px-4">
-                <h1 class="mt-4">List Service</h1>
+                <h1 class="mt-4">Quản lý đơn hàng</h1>
                 <ol class="breadcrumb mb-4">
 
                 </ol>
 
-
-
-                <!-- delete row -->
-                <script>
-                    function deleteRow(r) {
-                        var i = r.parentNode.parentNode.rowIndex;
-                        var j = document.getElementsByTagName("tr")[i];
-                        var index = j.childNodes[0].innerHTML;
-                        /*hoi lai xem co xoa hay khong*/
-                        var r = confirm("Are you sure delete?");
-                        if (r == true) {
-                            Delete_service(index);
-                            document.getElementById("myTable").deleteRow(i);
-                            console.log("Successfully deleted");
-                        } else {
-                        }
-                    }
-                </script>
-
-                <script type='text/x-handlebars-template' id='service-table'> </script>
-
-                {{!-- đổ dữ liệu lên table --}}
-                <script>
-                    get_allService((result) => {
-                        var birds = result;
-                        var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                        var ele = document.getElementById('data_table_service');
-                        for (var i = 0; i <= birds.length; i++) {
-                            // POPULATE SELECT ELEMENT WITH JSON.
-                            ele.innerHTML = ele.innerHTML + "<tr>" +
-                                "<td>" + birds[i].id_service + "</td>" +
-                                "<td>" + birds[i].name_service + "</td>" +
-                                "<td>" + birds[i].price_service + "</td>" +
-                                "<td>" + birds[i].description + "</td>" +
-                                "<td>" + html + "</td></tr>";
-                        }
-                        document.getElementById("data_table_service").innerHTML = ele;
-                    });
-                </script>
-
-                <div></div>
-
-                <!--search
-                <form class="form-inline my-2 my-lg-2" id="add5">
-                    <input class="form-control mr-sm-2" id="search_service" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="fas fa-search fa-sm"></i>
-                    </button>
-                </form>
-                -->
                 <div class="mt-4 mb-4">
                     <form class="d-none d-sm-inline-block form-inline  navbar-search" id="add5">
-                        <div class="input-group" >
-                            <input id="search_service" type="search" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                >
+                        <div class="input-group">
+                            {{!-- chon don hang theo tinh trang don hang --}}
+                            <select class="form-control" id="allcategory">
+
+
+                            </select>
+
+                            {{!-- <input id="search_service" type="search" class="form-control bg-light border-0 small"
+                                placeholder="Search for..."> --}}
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search fa-sm"></i>
@@ -227,55 +128,24 @@
                     </form>
 
                 </div>
-                <script type='text/x-handlebars-template' id='service-table1'></script>
-                {{!-- search service --}}
-                <script>
-                    function search_service() {
-                        document.getElementById("data_table_service").innerHTML = "";
-                        var temp_service = document.getElementById('search_service').value;
-                        console.log(temp_service);
-                        getServices_byname(temp_service, (result) => {
-                            var birds = result;
-                            var html = "<input type=\"button\" value=\"Delete\" onclick=\"deleteRow(this)\">";
-                            var ele = document.getElementById('data_table_service');
-                            for (var i = 0; i <= birds.length; i++) {
-                                // POPULATE SELECT ELEMENT WITH JSON.
-                                ele.innerHTML = ele.innerHTML + "<tr>" +
-                                    "<td>" + birds[i].id + "</td>" +
-                                    "<td>" + birds[i].name + "</td>" +
-                                    "<td>" + birds[i].price + "</td>" +
-                                    "<td>" + birds[i].description + "</td>" +
-                                    "<td>" + html + "</td></tr>";
-                            }
-                            document.getElementById("data_table_service").innerHTML = ele;
-                        });
-                    }
-                </script>
-
-                <script>
-                    var form = document.getElementById('add5');
-                    form.addEventListener('submit', function (event) {
-                        event.preventDefault();
-                        search_service();
-                    });
-                </script>
                 <!-- Table -->
                 <div class="card shadow mb-2">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">List service</h6>
+                        <h6 class="m-0 font-weight-bold text-primary"> Danh sách đơn hàng</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        <th hidden>ID</th>
+                                        <th>Phí ship</th>
+                                        <th>Tổng tiền</th>
+                                        <th>Tình trạng đơn hàng</th>
+                                        <th>Tình trạng thanh toán</th>
+                                        <th>Ngày lập đơn</th>
+                                        <th>Cập nhật</th>
 
-                                        <th>Price</th>
-                                        <th>Description</th>
-
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -291,6 +161,168 @@
                 </div>
 
             </div>
+
+
+
+            <script>
+                /*ham huy giao 1 don hang*/
+                function deleteRow(r) {
+
+                    var i = r.parentNode.parentNode.rowIndex;
+                    var j = document.getElementsByTagName("tr")[i];
+                    var index = j.childNodes[0].innerHTML;
+                    /*hoi lai xem co xoa hay khong*/
+                    var r = confirm("Bạn có chắc muốn hủy giao đơn hàng này?");
+                    if (r == true) {
+                        Delete_service(index);
+                        document.getElementById("myTable").deleteRow(i);
+                        console.log("Hủy thành công");
+
+                    } else {
+
+                    }
+
+                }
+
+
+
+                /*ham cap nhat tinh trang don hang*/
+                function Update_status(r) {
+                    var a = confirm("Bạn có chắc muốn cập nhật tình trạng đơn hàng này?");
+                    var i = r.parentNode.parentNode.rowIndex;
+                    var j = document.getElementsByTagName("tr")[i];
+
+
+                    var madh = j.childNodes[0].innerHTML;
+                    var tinhtrang = j.childNodes[3].innerHTML;
+
+                    console.log(madh);
+                    console.log(tinhtrang);
+
+
+
+                    if (a == true) {
+                        if (tinhtrang == "Đã tiếp nhận") {
+
+                            var temp_service1 = document.getElementById('allcategory').value;
+                            console.log(temp_service1);
+
+                            update_status_order(madh, "Đã lấy hàng");
+                            document.getElementById("myTable").deleteRow(i);
+
+
+                        }
+                        else if (tinhtrang == "Đã lấy hàng") {
+
+                            update_status_order(madh, "Đang giao");
+                            document.getElementById("myTable").deleteRow(i);
+
+            
+                        }
+                        else if (tinhtrang == "Đang giao") {
+                            
+                            update_status_order(madh, "Đã giao");
+                            update_status_payment(madh, "Đã thanh toán");
+
+                            var temp_service1 = document.getElementById('allcategory').value;
+                            document.getElementById("myTable").deleteRow(i);
+                        }
+                        else if (tinhtrang == "Đã giao") {
+
+                            alert("không thể cập nhật");
+                        }
+                    }
+
+                }
+            </script>
+
+            <script type='text/x-handlebars-template' id='service-table3'> </script>
+            <script type='text/x-handlebars-template' id='data_table_service'> </script>
+
+
+            <div></div>
+
+
+
+            {{!-- search service --}}
+            <script>
+                /*inner status of order into option select*/
+                var ele = document.getElementById('allcategory');
+
+                for (var i = 0; i < 1; i++) {
+                    // POPULATE SELECT ELEMENT WITH JSON.
+                    ele.innerHTML = ele.innerHTML +
+                        '<option value="' + "Đã tiếp nhận" + '">' + "Đã tiếp nhận" + '</option>' +
+                        '<option value="' + "Đã lấy hàng" + '">' + "Đã lấy hàng" + '</option>' +
+                        '<option value="' + "Đang giao" + '">' + "Đang giao" + '</option>' +
+                        '<option value="' + "Đã giao" + '">' + "Đã giao" + '</option>';
+                }
+
+                function search_order_bystatus() {
+                    var id_shp1 = localStorage.getItem("senddata_login_shipper");
+                    id_shp1 = JSON.parse(id_shp1);
+                    console.log(id_shp1);
+
+
+                    document.getElementById("data_table_service").innerHTML = "";
+
+
+
+                    var temp_service = document.getElementById('allcategory').value;
+                    console.log(temp_service);
+                    get_orders_ofshipper_bystatus(temp_service);
+                }
+            </script>
+
+            <script>
+                var form = document.getElementById('add5');
+                form.addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    search_order_bystatus();
+                });
+
+            </script>
+
+            {{!-- đổ dữ liệu lên table --}}
+            <script>
+                var id_shp = localStorage.getItem("senddata_login_shipper");
+                id_shp = JSON.parse(id_shp);
+                console.log(id_shp);
+                get_orders_ofshipper(id_shp[0].id, (result) => {
+
+                    var birds = result;
+
+
+                    var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
+                    var ele = document.getElementById('data_table_service');
+
+                    for (var i = 0; i < birds.length; i++) {
+
+                        // POPULATE SELECT ELEMENT WITH JSON.
+                        ele.innerHTML = ele.innerHTML +
+                            "<tr>" +
+                            "<td hidden>" + birds[i].id + "</td>" +
+                            "<td>" + birds[i].phiShip + "</td>" +
+                            "<td>" + birds[i].tongTien + "</td>" +
+                            "<td>" + birds[i].tinhTrangDonHang + "</td>" +
+                            "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
+                            "<td>" + birds[i].ngayLapDon + "</td>" +
+                            "<td>" + html1 + "</td>" +
+
+                            "</tr>";
+
+                        onClick = "homeForm(\''+myForm+'\',\''+divName+'\')"
+
+                    }
+
+                    document.getElementById("data_table_service").innerHTML = ele.innerHTML;
+
+                });
+            </script>
+
+
+
+
 
 
             <footer class="py-4 bg-light mt-auto">
@@ -309,12 +341,16 @@
     </div>
 
 
+
+
+
     <link href="../stylesheets/dataTable.bootstrap4.min.css" rel="stylesheet">
+
     <script src="../javascripts/jquery.dataTable.min.js"></script>
     <script src="../javascripts/dataTable.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="../javascripts/datatables-demo.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         crossorigin="anonymous"></script>
 

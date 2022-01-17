@@ -24,47 +24,59 @@
 </section>
 
 
-{{!-- xu ly luu danh sach san pham vao gio hang
-console.log(id);
-console.log(id_kh[0].id);
-console.log(id_kh[1].id);
-console.log(sl);
-console.log(giatien); --}}
+
+
+
 <script>
-    var list_service = '';
     function add_service_tocart(id) {
-
-        list_service += id;
-
         var id_kh = localStorage.getItem("senddata_login");
-        var sl = document.getElementById("inputQuantity").value;
-
-
+        var soluongcanmua = document.getElementById("inputQuantity").value;
         console.log(id_kh);
         id_kh = JSON.parse(id_kh);
-        var slspcl = localStorage.getItem("slsp_conlai");
-        console.log(slspcl);
-        console.log(sl);
 
-        if (sl <= slspcl && sl > 0) {
-            add_product_into_cart(id, id_kh[0].id, sl);
+        var soluongconlai = document.getElementById("input_sl").innerHTML;
+   
+        console.log("So luong con lai: " + soluongconlai);
+        console.log("So luong can mua: " + soluongcanmua);
+
+        console.log(typeof(soluongconlai));
+        console.log(typeof(soluongcanmua));
+        soluongcanmua = parseInt(soluongcanmua);
+        soluongconlai = parseInt(soluongconlai);
+        console.log(typeof(soluongconlai));
+        console.log(typeof(soluongcanmua));
+
+        if ((soluongcanmua <= soluongconlai) && (soluongcanmua > 0)) {
+            console.log(soluongcanmua);
+            console.log(soluongconlai);
+            console.log(soluongcanmua - soluongconlai);
+            add_product_into_cart(id, id_kh[0].id, soluongcanmua);
             alert("Thêm sản phẩm thành công");
         }
-        else if(sl  == 0)
-        {
-            alert("Cần phải đặt ít nhất 1 sản phẩm");
+        else if(soluongcanmua == 0){
+            alert("Cần đặt ít nhất 1 sản phẩm");
         }
-        else {
-            alert("Không đủ số lượng sản phẩm");
+        else{
+             alert("Không đủ số lượng sản phẩm");
         }
-
-
-
+        
     }
 </script>
 
-
-
+<script>    
+     /*ham xu ly anh*/
+    function Xulyanh(link) {
+        link = link.split('d/');
+       
+        link = link[1];
+        
+        link = link.split('/');
+    
+        link = link[0];
+       
+        return link;
+    }
+</script>
 
 
 <script>
@@ -78,15 +90,15 @@ console.log(giatien); --}}
 
         ele.innerHTML = ele.innerHTML +
             "<div class=\"col-md-6\">" +
-            "<img class=\"card-img-top mb-5 mb-md-0 round\" src=\"\" alt=\"...\" />" +
+            "<img class=\"card-img-top mb-5 mb-md-0 round\" src=\"https://drive.google.com/uc?export=view&id=" + Xulyanh("" + birds.image + "") + "\">" +
             "</div>" +
 
             "<div class=\"col-md-6\">" +
 
             "<h1 class=\"display-5 fw-bolder\">" + birds.tenSP + "</h1>" +
             "<div class=\"fs-5 mb-5\">" +
-            "<div id =\"input_price\">" + birds.giaTien + "</div>" +
-            "<div id =\"input_sl\">" + birds.sl + "</div>" +
+            "<div id =\"input_price\">" + birds.giaTien + "VNĐ" + "</div>" +
+            "<div id =\"input_sl\" value = \""+birds.sl+"\">"  + birds.sl + "</div>" +
             "</div>" +
 
             "<div class=\"d-flex\">" +
@@ -101,10 +113,10 @@ console.log(giatien); --}}
 
         document.getElementById("allservices").innerHTML = ele.innerHTML;
 
-        var soluongsanpham = document.getElementById("input_sl").innerHTML;
-        localStorage.setItem("slsp_conlai", soluongsanpham);
+       
     });
 </script>
+
 
 <section id="testimonial" class="testimonial-section bg-white py-5 h-1000">
     <section class="page-section cta">

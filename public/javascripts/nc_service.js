@@ -64,7 +64,7 @@ function dangnhap_shipper(username, password) {
       if (data != "") {
         console.log(data);
         localStorage.setItem("senddata_login_shipper", JSON.stringify(data));
-        window.location.assign("http://localhost:8888/shp_list_orders");
+        window.location.assign("http://localhost:8888/orders");
       }
       else {
         alert("Tài khoản hoặc mật khẩu không đúng, Vui lòng nhập lại");
@@ -72,6 +72,17 @@ function dangnhap_shipper(username, password) {
 
     })
   );
+}
+
+function dangnhap_ncc(username, password) {
+
+  if (username = "sp3" && password == "123") {
+    window.location.assign("http://localhost:8888/supplier");
+  }
+  else {
+    alert("Tài khoản hoặc mật khẩu không đúng, Vui lòng nhập lại");
+  }
+
 }
 
 
@@ -138,7 +149,7 @@ function get_orders_ofshipper(id_shp, callback) {
       var contextualHtml = compiled({ allservices: data });
       $('#allservices').html(contextualHtml);
       array = data;
-    
+
       return callback(array);
     })
   );
@@ -146,6 +157,7 @@ function get_orders_ofshipper(id_shp, callback) {
 
 function get_orders_ofshipper_hasstatus_dalayhang(id_shp, callback) {
   var array = [];
+  console.log(id_shp);
   GET('http://localhost:8080/api/dondalay/' + id_shp).then(res =>
     res.json().then(data => {
       var template = $('#service-table3').html();
@@ -197,13 +209,14 @@ function get_orders_ofshipper_bystatus(status) {
   var id_shp1 = localStorage.getItem("senddata_login_shipper");
   id_shp1 = JSON.parse(id_shp1);
 
+  console.log(id_shp1);
 
   if (status == "Đã tiếp nhận") {
     console.log("da tiep nhan ne");
     get_orders_ofshipper(id_shp1[0].id, (result) => {
-      
+
       var birds = result;
-     
+
       var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
       document.getElementById("data_table_service").innerHTML = "";
       var ele = document.getElementById('data_table_service');
@@ -218,77 +231,77 @@ function get_orders_ofshipper_bystatus(status) {
           "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
-          
+
           "</tr>";
       }
       document.getElementById("data_table_service").innerHTML = ele.innerHTML;
     });
   }
   else if (status == "Đã lấy hàng") {
-   
+
     get_orders_ofshipper_hasstatus_dalayhang(id_shp1[0].id, (result) => {
       var birds = result;
-     
+
       var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
       var ele = document.getElementById('data_table_service');
       for (var i = 0; i < birds.length; i++) {
         // POPULATE SELECT ELEMENT WITH JSON.
         ele.innerHTML = ele.innerHTML + "<tr>" +
-        "<td hidden>" + birds[i].id + "</td>" +
+          "<td hidden>" + birds[i].id + "</td>" +
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
           "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
-         
+
           "</tr>";
       }
       document.getElementById("data_table_service").innerHTML = ele.innerHTML;
     });
   }
   else if (status == "Đang giao") {
-   
+
     get_orders_ofshipper_hasstatus_danggiao(id_shp1[0].id, (result) => {
       var birds = result;
-     
+
       var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
 
       var ele = document.getElementById('data_table_service');
       for (var i = 0; i < birds.length; i++) {
         // POPULATE SELECT ELEMENT WITH JSON.
         ele.innerHTML = ele.innerHTML + "<tr>" +
-        "<td hidden>" + birds[i].id + "</td>" +
+          "<td hidden>" + birds[i].id + "</td>" +
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
           "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
-        
+
           "</tr>";
       }
       document.getElementById("data_table_service").innerHTML = ele.innerHTML;
     });
   }
   else if (status == "Đã giao") {
-    
+
     get_orders_ofshipper_hasstatus_dagiao(id_shp1[0].id, (result) => {
       var birds = result;
-     
+
       var html1 = "<input type=\"button\" value=\"Update\" onclick=\"Update_status(this)\">";
       var ele = document.getElementById('data_table_service');
       for (var i = 0; i < birds.length; i++) {
         // POPULATE SELECT ELEMENT WITH JSON.
         ele.innerHTML = ele.innerHTML + "<tr>" +
-        "<td hidden>" + birds[i].id + "</td>" +
+          "<td hidden>" + birds[i].id + "</td>" +
           "<td>" + birds[i].phiShip + "</td>" +
           "<td>" + birds[i].tongTien + "</td>" +
           "<td>" + birds[i].tinhTrangDonHang + "</td>" +
           "<td>" + birds[i].tinhTrangThanhToan + "</td>" +
           "<td>" + birds[i].ngayLapDon + "</td>" +
           "<td>" + html1 + "</td>" +
-        
+
           "</tr>";
       }
       document.getElementById("data_table_service").innerHTML = ele.innerHTML;
@@ -317,7 +330,7 @@ function get_orders_ofshipper_bystatus(status) {
 
 
 function update_status_order(orders, status) {
-  PUT('http://localhost:8080/api/tinhtrangdonhang?MaDH_input=' +orders+ '&TinhTrangDH_input=' + status).then(res =>
+  PUT('http://localhost:8080/api/tinhtrangdonhang?MaDH_input=' + orders + '&TinhTrangDH_input=' + status).then(res =>
     res.json().then(data => {
       console.log(orders);
       console.log(status);
@@ -332,16 +345,11 @@ function update_status_order(orders, status) {
 }
 
 function update_status_payment(orders, status) {
-  PUT('http://localhost:8080/api/tinhtrangthanhtoan?MaDH_input=' +orders+ '&TinhTrangTT_input=' + status).then(res =>
+  PUT('http://localhost:8080/api/tinhtrangthanhtoan?MaDH_input=' + orders + '&TinhTrangTT_input=' + status).then(res =>
     res.json().then(data => {
       console.log(orders);
       console.log(status);
-      if (data != "") {
-        alert("Cập nhật thành công");
-      }
-      else {
-        alert("Cập nhật thất bại");
-      }
+
     })
   );
 }
@@ -364,20 +372,7 @@ function Delete_order(id) {
 }
 
 
-function Delete_service(id) {
-  DELETE('https://backendsundara.herokuapp.com/service/remove/' + id, {
 
-  }).then(res =>
-    res.json().then(data => {
-      if (data.code == 0) {
-        alert("Successfully Deleted");
-      }
-      else {
-        alert("Failed Deleted");
-      }
-    })
-  );
-}
 
 
 

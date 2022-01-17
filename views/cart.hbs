@@ -132,7 +132,7 @@
                                 "<td>" + result.giohang.tongTien + "</td>" +
 
                                 "</tr>";
-                            localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
+                            
                         })
                         /*------add_booking("12-09-2021", "23:00", "1", "Le thi", "1234567890", "abc@gmail.com", 260000, "3", "1");--------*/
                     }
@@ -147,7 +147,7 @@
                 {{!-- function delete row --}}
                 <script>
 
-                    console.log("ss");
+
                     /*var id_service = localStorage.getItem("senddata");*/
                     function deleteRow(r) {
 
@@ -209,6 +209,8 @@
                             "<td>" + result.giohang.tongTien + "</td>" +
 
                             "</tr>";
+                        console.log("ma gio hang ne: " + result.dsgioHang[0].chitietgh.maGH);
+                        localStorage.setItem("id_gh", result.dsgioHang[0].chitietgh.maGH);
                     })
                 </script>
 

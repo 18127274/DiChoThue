@@ -163,7 +163,7 @@
 			for (var i = 0; i < birds.length; i++) {
 
 				var list_arr_service = "";
-
+				console.log("anh ne: " + birds[i].image);
 				ele.innerHTML = ele.innerHTML +
 					"<div class=\"col-lg-6\">" +
 					"<div class=\"card mb-4\">" +
@@ -172,7 +172,7 @@
 					"</a>" +
 					"<div class=\"card-body\">" +
 
-					"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + "   VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl +
+					"<h2 class=\"card-title h4\">" + birds[i].tenSP + "</h2>" + birds[i].giaTien + '&nbsp' + "VNĐ" + "<br>" + "Số lượng còn lại: " + birds[i].sl +
 					"<br>" +
 
 					"<a class=\"w-55 btn btn-primary\" onclick=\"send_idservice(" + birds[i].id + ")\" id=\"detai\"> Chi tiết sản phẩm</a>" +

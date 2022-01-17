@@ -19,37 +19,65 @@
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Đăng kí tài khoản nhà cung cấp</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Đăng kí</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" id = "add1">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="imputdiahchi"
+                                    <input type="text" class="form-control form-control-user" id="name"
+                                        placeholder="Tên shop">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="username"
+                                        placeholder="Tài khoản">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="pass"
+                                        placeholder="Mật khẩu">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="phone" class="form-control form-control-user" id="phone"
+                                        placeholder="Số điện thoại">
+                                </div>
+                                 <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="email"
+                                        placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="address"
                                         placeholder="Địa chỉ">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputnameshop"
-                                        placeholder="Họ Shop">
+                                 <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="somuitiem"
+                                        placeholder="Tình trạng">
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email ">
-                                </div>
-                                <div class="form-group">
-                                    <input type="phone" class="form-control form-control-user" id="exampleInputsdt"
-                                        placeholder="Số điện thoại ">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleFormControlFile1">Example file input</label>
-                                     <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                                 </div>
-                                <a href="/#" class="btn btn-primary btn-user btn-block">
-                                    Đăng kí
+                               {{!--  <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Mật khẩu">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input type="password" class="form-control form-control-user"
+                                            id="exampleRepeatPassword" placeholder="Xác nhận lại mật khẩu">
+                                    </div>
+                                </div> --}}
+                                
+                            
+                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Đăng ký">
+                                <hr>
+                                <a href="/registerncc" class="btn btn-primary btn-user btn-block">
+                                    Đăng kí tài khoản nhà cung cấp
                                 </a>
-                                
-                                
+                                <a href="/registershipper" class="btn btn-primary btn-user btn-block">
+                                    Đăng kí tài khoản shipper
+                                </a>
                             </form>
-                            
-                            
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Quên mật khẩu?</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/login">Đã có tài khoản? Đăng nhập</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,18 +106,17 @@ javascript --}}
     form.addEventListener('submit', function (event) {
         event.preventDefault();
 
-        var id = document.getElementById('id').value;
+
         var name = document.getElementById('name').value;
         var username = document.getElementById('username').value;
         var pass = document.getElementById('pass').value;
         var phone = document.getElementById('phone').value;
         var email = document.getElementById('email').value;
         var address = document.getElementById('address').value;
-        var area = document.getElementById('area').value;
-        pass = pass.slice(2);
+        var somui = document.getElementById('somuitiem').value;
 
        
-        Register_account_Customer(id, name, username, pass, phone, email, address, area);
+        Register_account_supplier(name, username, pass, phone, email, address, somui);
     });
 </script>
 

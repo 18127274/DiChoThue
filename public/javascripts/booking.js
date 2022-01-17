@@ -51,6 +51,7 @@ function Register_account_Customer(name, username, pass, phone, email, address, 
     res.json().then(data => {
       if (data != "") {
         alert("Đăng ký tài khoản thành công");
+        window.location = "http://localhost:8888/login";
         console.log(data.lenght);
 
       }
@@ -75,6 +76,7 @@ function Register_account_Shipper(name, username, pass, phone, email, address, s
       console.log(data);
       if (data != "") {
         alert("Đăng ký tài khoản thành công");
+        window.location.assign("http://localhost:8888/login_shipper");
         console.log(data.lenght);
 
       }
@@ -85,6 +87,33 @@ function Register_account_Shipper(name, username, pass, phone, email, address, s
     })
   );
 }
+
+function Register_account_supplier(name, username, pass, phone, email, address, somuitiem) {
+  POST('http://localhost:8081/api/nhacungcap', {
+    "hoten": name,
+    "tendangnhap": username,
+    "matkhau": pass,
+    "sdt": phone,
+    "email": email,
+    "diachi": address,
+    "soMuiTiem": somuitiem
+  }).then(res =>
+    res.json().then(data => {
+      console.log(data);
+      if (data != "") {
+        alert("Đăng ký tài khoản thành công");
+        window.location.assign("http://localhost:8888/login_ncc");
+        console.log(data.lenght);
+
+      }
+      else {
+        alert("Đăng ký tài khoản thất bại");
+      }
+
+    })
+  );
+}
+
 
 function add_product_into_cart(masanpham, makhachhang, soluong) {
   POST('http://localhost:8080/api/themgiohang', {
@@ -99,6 +128,43 @@ function add_product_into_cart(masanpham, makhachhang, soluong) {
     })
   );
 }
+
+function add_service(tensp, maloai, mancc, giatien, sl, min, link_image) {
+  console.log(tensp);
+  console.log(maloai);
+  console.log(mancc);
+  console.log(giatien);
+  console.log(sl);
+  console.log(min);
+  console.log(link_image);
+  maloai = parseInt(maloai);
+  giatien = parseInt(giatien);
+  sl = parseInt(sl);
+  min = parseInt(min);
+
+  POST('http://localhost:8081/api/sanpham', {
+    "tenSP": tensp,
+    "maLoai": maloai,
+    "maNCC": mancc,
+    "giaTien": giatien,
+    "sl": sl,
+    "min": min,
+    "image": link_image
+  }).then(res =>
+    res.json().then(data => {
+      console.log(data);
+      if (data != "") {
+        alert("Thêm sản phẩm thành công");
+      }
+      else {
+        alert("Thêm sản phẩm thất bại");
+      }
+
+    })
+  );
+}
+
+http://localhost:8081/api/sanpham
 
 function delete_service_ofcart(idchitiet) {
   DELETE('http://localhost:8080/api/deletegiohang/' + idchitiet).then(res =>
@@ -163,63 +229,6 @@ function Receive_order(mashp, madonhang) {
 
 
 
-
-function getServices() {
-  var listdata;
-  fetch('https://backendsundara.herokuapp.com/service/get-all', {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-    },
-  }).then(res =>
-    res.json().then(data => {
-      document.getElementById("services").innerHTML = data.data;
-      listdata = data.data;
-      console.log(listdata);
-      return listdata;
-    })
-  );
-}
-
-function get_allbooking(callback) {
-  var array = [];
-  GET('https://backendsundara.herokuapp.com/booking/get-all').then(res =>
-    res.json().then(data => {
-      var template = $('#booking-table').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices: data.data });
-      $('#allbooking').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
-
-function get_detailbooking(id_booking, callback) {
-  GET('https://backendsundara.herokuapp.com/booking/get-detail?id_booking=' + id_booking).then(res =>
-    res.json().then(data => {
-      var template = $('#booking-table').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices: data });
-      $('#allbooking').html(contextualHtml);
-      return callback(data);
-    })
-  );
-}
-
-function get_bookingbyphone(phone, callback) {
-  var array = [];
-  GET('https://backendsundara.herokuapp.com/booking/get-by-phone?phone=' + phone).then(res =>
-    res.json().then(data => {
-      var template = $('#booking-table').html();
-      var compiled = Handlebars.compile(template);
-      var contextualHtml = compiled({ allservices: data.data });
-      $('#allbooking').html(contextualHtml);
-      array = data.data;
-      return callback(array);
-    })
-  );
-}
 
 
 

@@ -136,6 +136,14 @@ router.get('/ordered_cus', function (req, res, next) {
   res.render('ordered_cus', {layout: 'customer'}) 
 });
 
+router.get('/registerncc', function (req, res, next) {
+  res.render('registerncc', {layout: 'admin'}) 
+});
+
+router.get('/login_ncc', function (req, res, next) {
+  res.render('login_ncc', {layout: 'admin'}) 
+});
+
 
 
 
